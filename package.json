@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "A simple web based expense management software created using Express and Vue, MongoDB is used as database and tailwind css is used for UI. Yes, it's created in one of the most popular full stack technologies combination known as MEVN.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server",
+    "server": "nodemon server/server",
+    "client": "npm run serve --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "dependencies": {
