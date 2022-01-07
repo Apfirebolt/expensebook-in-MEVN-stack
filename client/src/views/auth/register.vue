@@ -136,23 +136,23 @@
 </template>
 <script>
 export default {
-  name: "Register",
+  name: 'Register',
   data() {
     return {
-      user: {}
+      user: {},
     };
   },
   methods: {
     async attemptSignUp() {
-      const response = await this.$http.post("users/", this.user);
+      const response = await this.$http.post('users/', this.user);
       if (response) {
         this.$toast.show({
-          content: "Your have been registered successfully, please login and continue.",
-          type: "success"
+          content: 'Your have been registered successfully, please login and continue.',
+          type: 'success',
         });
-        this.$router.push({ name: "Login" });
+        this.$router.push({ name: 'Login' });
       }
-    }
-  }
+    },
+  },
 };
 </script>

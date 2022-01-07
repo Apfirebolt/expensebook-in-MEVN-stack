@@ -7,21 +7,21 @@
   </div>
 </template>
 <script>
-import HeaderComponent from "../components/common/header.vue";
-import HeroSection from "../components/common/hero-section.vue";
-import FooterComponent from "../components/common/footer.vue";
+import HeaderComponent from '../components/common/header.vue';
+import HeroSection from '../components/common/hero-section.vue';
+import FooterComponent from '../components/common/footer.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HeaderComponent,
     HeroSection,
-    FooterComponent
+    FooterComponent,
   },
   data() {
     return {
-      user: {}
+      user: {},
     };
-  }
+  },
 };
 </script>

@@ -60,11 +60,11 @@ const routes = [
       },
     ],
   },
-  { 
-    path: "*",
-    name: 'NotFound', 
-    component: () => import('../views/404.vue')
-  }
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('../views/404.vue'),
+  },
 ];
 
 const router = new VueRouter({
@@ -82,6 +82,6 @@ router.beforeEach((to, from, next) => {
     }
   }
   next();
-})
+});
 
 export default router;

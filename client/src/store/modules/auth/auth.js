@@ -1,5 +1,5 @@
-import * as types from './auth-types';
 import axios from 'axios';
+import * as types from './auth-types';
 import events from '../../../plugins/events';
 import router from '../../../routes';
 import interceptor from '../../../plugins/interceptor';
@@ -7,19 +7,13 @@ import interceptor from '../../../plugins/interceptor';
 const state = {
   token: null,
   isAuthenticated: false,
-  profileData: null
+  profileData: null,
 };
 
 const getters = {
-  [types.GET_TOKEN]: state => {
-    return state.token;
-  },
-  [types.IS_USER_AUTHENTICATED]: state => {
-    return state.isAuthenticated;
-  },
-  [types.GET_PROFILE_DATA]: state => {
-    return state.profileData;
-  },
+  [types.GET_TOKEN]: (state) => state.token,
+  [types.IS_USER_AUTHENTICATED]: (state) => state.isAuthenticated,
+  [types.GET_PROFILE_DATA]: (state) => state.profileData,
 };
 
 const mutations = {
@@ -38,8 +32,8 @@ const mutations = {
 };
 
 const actions = {
-  [types.REGISTER_USER]: ({commit}, payload) => {
-    let url = process.env.VUE_APP_ROOT_API + 'accounts/api/register';
+  [types.REGISTER_USER]: (payload) => {
+    const url = `${process.env.VUE_APP_ROOT_API}accounts/api/register`;
     axios.post(url, payload)
       .then((response) => {
       })
@@ -48,8 +42,8 @@ const actions = {
   },
 
   // Action for logging in user
-  [types.SET_TOKEN_ACTION]: ({commit}, payload) => {
-    let url = 'api/users/login';
+  [types.SET_TOKEN_ACTION]: ({ commit }, payload) => {
+    const url = 'api/users/login';
     axios.post(url, payload)
       .then((response) => {
         events.emit('add_toast', {
@@ -62,12 +56,12 @@ const actions = {
         router.push({ name: 'Dashboard' });
       })
       .catch((err) => {
-        
+
       });
   },
 
   // Log out functionality
-  [types.LOG_OUT]: ({commit}) => {
+  [types.LOG_OUT]: ({ commit }) => {
     commit(types.LOG_OUT_SUCCESS);
     try {
       events.emit('add_toast', {
@@ -76,28 +70,27 @@ const actions = {
       });
       localStorage.removeItem('Token');
       localStorage.removeItem('userId');
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
     router.push({ name: 'Login' });
   },
 
   // Action to check if the user is authenticated once user refreshes the page.
-  [types.CHECK_USER_AUTHENTICATION]: ({commit}) => {
+  [types.CHECK_USER_AUTHENTICATION]: ({ commit }) => {
     try {
-      let storedToken = localStorage.getItem('Token');
-      if(storedToken) {
+      const storedToken = localStorage.getItem('Token');
+      if (storedToken) {
         commit(types.SET_TOKEN, storedToken);
       }
-    }
-    catch(err) {
+    } catch (err) {
       console.error(err);
     }
   },
 
   // Get the profile data of the user
-  [types.GET_PROFILE_DATA_ACTION]: ({commit}) => {
-    let url = 'users/profile';
+  [types.GET_PROFILE_DATA_ACTION]: ({ commit }) => {
+    const url = 'users/profile';
     interceptor.get(url)
       .then((response) => {
         commit(types.SET_PROFILE_DATA, response);
@@ -112,5 +105,5 @@ export default {
   state,
   mutations,
   actions,
-  getters
-}
+  getters,
+};

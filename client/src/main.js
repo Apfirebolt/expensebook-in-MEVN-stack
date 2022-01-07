@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
 import VueTailwind from 'vue-tailwind/dist/full';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import App from './App.vue';
 import events from './plugins/events';
 import interceptor from './plugins/interceptor';
 import router from './routes/index';
@@ -18,7 +18,7 @@ Vue.component('ValidationObserver', ValidationObserver);
 Vue.prototype.$bus = events;
 Vue.prototype.$http = interceptor;
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 Vue.prototype.$loading = {
   show: () => {
@@ -38,8 +38,5 @@ Vue.prototype.$toast = {
 new Vue({
   router,
   store,
-  render: h => h(App),
-}).$mount('#app')
-
-
-
+  render: (h) => h(App),
+}).$mount('#app');

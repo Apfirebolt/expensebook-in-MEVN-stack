@@ -27,6 +27,6 @@ export default {
     ...mapActions({
       getProfileData: authTypes.GET_PROFILE_DATA_ACTION,
     }),
-  }
+  },
 };
 </script>

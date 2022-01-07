@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getLoginAction: authTypes.SET_TOKEN_ACTION
+      getLoginAction: authTypes.SET_TOKEN_ACTION,
     }),
     async attemptSignIn() {
       this.getLoginAction(this.user);
