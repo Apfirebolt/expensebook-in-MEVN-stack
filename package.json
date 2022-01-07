@@ -1,0 +1,27 @@
+{
+  "name": "expensebook",
+  "version": "1.0.0",
+  "description": "A simple web based expense management software created using Express and Vue, MongoDB is used as database and tailwind css is used for UI. Yes, it's created in one of the most popular full stack technologies combination known as MEVN.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.6",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  },
+  "author": "Apfirebolt",
+  "license": "ISC"
+}
