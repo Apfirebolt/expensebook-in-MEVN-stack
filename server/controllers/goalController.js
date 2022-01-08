@@ -5,12 +5,14 @@ import Goal from "../models/goalModel.js";
 // @route   POST /api/goals
 // @access  Private
 const createGoal = asyncHandler(async (req, res) => {
-  const { title, content, status, duration } = req.body;
+  const { title, content, status, duration, amount } = req.body;
+  console.log('Req body for goal ', req.body);
   const goal = await Goal.create({
     title,
     content,
     status,
     duration,
+    amount,
     createdBy: req.user._id,
   });
   if (goal) {

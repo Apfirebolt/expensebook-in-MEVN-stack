@@ -3,7 +3,10 @@
     <p class="truncate font-semibold text-center my-2">
       {{ goal.title }}
     </p>
-    <p class="truncate text-center">
+    <p class="text-center text-gray-700 px-2 py-1 rounded my-2 font-medium">
+      Amount required is <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">{{ goal.amount }}</span>
+    </p>
+    <p class="w-1/2 mx-auto truncate text-center px-2 py-1 rounded text-xs my-2 font-medium" :class="applyFilterClasses">
       {{ goal.status }}
     </p>
     <div class="flex items-center justify-center my-2">
@@ -50,6 +53,17 @@ export default {
     goal: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    applyFilterClasses() {
+      const value = this.goal.status;
+      if (value === 'Completed') {
+        return 'bg-green-400 text-white';
+      } if (value === 'In Progress') {
+        return 'bg-yellow-100 text-yellow-800';
+      }
+      return 'bg-blue-500 text-gray-200';
     },
   },
   methods: {

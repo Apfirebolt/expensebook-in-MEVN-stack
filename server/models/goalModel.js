@@ -16,7 +16,11 @@ const goalSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      required: false,  
+      required: false,
+    },
+    amount: {
+      type: Number,
+      required: true,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

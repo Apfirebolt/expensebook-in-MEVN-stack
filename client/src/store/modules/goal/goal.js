@@ -1,6 +1,6 @@
-import * as types from "./goal-types";
-import events from "../../../plugins/events";
-import interceptor from "../../../plugins/interceptor";
+import * as types from './goal-types';
+import events from '../../../plugins/events';
+import interceptor from '../../../plugins/interceptor';
 
 const state = {
   goal: null,
@@ -24,14 +24,14 @@ const mutations = {
 const actions = {
   // Create Goal Action
   [types.CREATE_GOAL_ACTION]: ({ commit }, payload) => {
-    const url = "/goals";
+    const url = '/goals';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Goal added successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Goal added successfully',
+            type: 'success',
           });
         }
       })
@@ -42,7 +42,7 @@ const actions = {
 
   // Setting all GOALS
   [types.GET_ALL_GOALS_ACTION]: ({ commit }) => {
-    const url = "/goals";
+    const url = '/goals';
     interceptor
       .get(url)
       .then((response) => {
@@ -73,9 +73,9 @@ const actions = {
       .delete(url)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Goal deleted successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Goal deleted successfully',
+            type: 'success',
           });
         }
       })
@@ -91,9 +91,9 @@ const actions = {
       .patch(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Goal updated successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Goal updated successfully',
+            type: 'success',
           });
         }
       })

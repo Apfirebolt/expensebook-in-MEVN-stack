@@ -17,6 +17,22 @@
           </t-input-group>
         </ValidationProvider>
       </div>
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+        <ValidationProvider v-slot="{ errors }" name="Goal Amount" rules="required">
+          <t-input-group
+            label="Goal Amount"
+            :feedback="errors[0]"
+            :variant="errors.length > 0 ? 'danger' : ''"
+          >
+            <t-input
+              v-model="goalData.amount"
+              type="number"
+              name="Amount"
+              :variant="errors.length > 0 ? 'danger' : ''"
+            />
+          </t-input-group>
+        </ValidationProvider>
+      </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <t-input-group label="Goal Duration">
           <t-select v-model="goalData.duration" placeholder="Select Duration" :options="durationChoices" name="Duration" />
@@ -40,12 +56,12 @@
 </template>
 
 <script>
-import Editor from '../../components/common/editor.vue';
+import Editor from '../common/editor.vue';
 
 export default {
   name: 'AddUpdateGoalForm',
   components: {
-    Editor
+    Editor,
   },
   props: {
     goal: {
@@ -56,10 +72,10 @@ export default {
   data() {
     return {
       goalData: {
-        content: ''
+        content: '',
       },
-      durationChoices: ["1 Month", "3 Months", "4 Months", "6 Months", "9 Months", "1 Year"],
-      statusChoices: ["In Progress", "Completed", "Not Yet Started"]
+      durationChoices: ['1 Month', '3 Months', '4 Months', '6 Months', '9 Months', '1 Year'],
+      statusChoices: ['In Progress', 'Completed', 'Not Yet Started'],
     };
   },
   mounted() {
@@ -77,7 +93,7 @@ export default {
     },
     handleContentUpdate(content) {
       this.goalData = {
-        content: content
+        content,
       };
     },
   },

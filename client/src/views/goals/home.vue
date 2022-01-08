@@ -240,6 +240,7 @@ export default {
         content: payload.content,
         status: payload.status,
         duration: payload.duration,
+        amount: payload.amount,
       };
       this.addGoalAction(formattedPayload);
       this.isAddGoalModalOpened = false;
