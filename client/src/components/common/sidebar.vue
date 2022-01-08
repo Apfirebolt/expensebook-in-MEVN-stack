@@ -1,9 +1,8 @@
 <template>
   <nav class="mt-5 flex-1 px-2 space-y-1">
     <!-- Current: "bg-indigo-800 text-white", Default: "text-white hover:bg-indigo-600 hover:bg-opacity-75" -->
-    <a
-      href="#"
-      class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'Home'}"
+                 class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/home -->
       <svg
@@ -22,11 +21,10 @@
         />
       </svg>
       Dashboard
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'ExpenseHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/users -->
       <svg
@@ -41,15 +39,14 @@
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+          d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
         />
       </svg>
-      Team
-    </a>
+      Expense
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'GoalsHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/folder -->
       <svg
@@ -67,12 +64,12 @@
           d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
         />
       </svg>
-      Projects
-    </a>
+      Goals
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'CalendarHome'}"
+                 href="#"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/calendar -->
       <svg
@@ -91,11 +88,10 @@
         />
       </svg>
       Calendar
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'ExpenseBookHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/inbox -->
       <svg
@@ -113,12 +109,11 @@
           d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
         />
       </svg>
-      Documents
-    </a>
+      Expense Book
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'ReportsHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/chart-bar -->
       <svg
@@ -137,11 +132,32 @@
         />
       </svg>
       Reports
-    </a>
+    </router-link>
+    <router-link :to="{ name: 'IncomeHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    >
+      <!-- Heroicon name: outline/chart-bar -->
+      <svg
+        class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      Income
+    </router-link>
   </nav>
 </template>
 <script>
 export default {
-  name: "DesktopMenu",
+  name: 'DesktopMenu',
 };
 </script>

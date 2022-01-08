@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
 import userRoutes from './routes/authRoutes.js'
+import expenseRoutes from './routes/expenseRoutes.js'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.use(express.json())
 const __dirname = path.resolve()
 
 app.use('/api/users', userRoutes)
+app.use('/api/expense', expenseRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))
