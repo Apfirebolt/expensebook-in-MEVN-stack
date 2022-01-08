@@ -8,6 +8,7 @@ import connectDB from './config/db.js'
 import userRoutes from './routes/authRoutes.js'
 import expenseRoutes from './routes/expenseRoutes.js'
 import goalRoutes from './routes/goalRoutes.js'
+import incomeRoutes from './routes/incomeRoutes.js'
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ const __dirname = path.resolve()
 app.use('/api/users', userRoutes)
 app.use('/api/expense', expenseRoutes)
 app.use('/api/goals', goalRoutes)
+app.use('/api/income', incomeRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))
