@@ -221,7 +221,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allGoals: goalTypes.GET_ALL_GoalS,
+      allGoals: goalTypes.GET_ALL_GOALS,
     }),
   },
   mounted() {
@@ -236,9 +236,10 @@ export default {
     }),
     addGoal(payload) {
       const formattedPayload = {
-        date: payload.date,
-        amount: payload.amount,
-        note: payload.note,
+        title: payload.title,
+        content: payload.content,
+        status: payload.status,
+        duration: payload.duration,
       };
       this.addGoalAction(formattedPayload);
       this.isAddGoalModalOpened = false;
@@ -264,7 +265,7 @@ export default {
     openConfirmDeleteModal(id) {
       this.isConfirmModalOpened = true;
       this.selectedGoal = this.allGoals.find((item) => item._id === id);
-      this.deleteMessage = `Are you sure you want to delete Goal of ${this.selectedGoal.amount} ?`;
+      this.deleteMessage = `Are you sure you want to delete Goal title "${this.selectedGoal.title}" ?`;
     },
   },
 };

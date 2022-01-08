@@ -1,6 +1,6 @@
-import * as types from './goal-types';
-import events from '../../../plugins/events';
-import interceptor from '../../../plugins/interceptor';
+import * as types from "./goal-types";
+import events from "../../../plugins/events";
+import interceptor from "../../../plugins/interceptor";
 
 const state = {
   goal: null,
@@ -24,13 +24,16 @@ const mutations = {
 const actions = {
   // Create Goal Action
   [types.CREATE_GOAL_ACTION]: ({ commit }, payload) => {
-    const url = '/goals';
-    interceptor.post(url, payload)
+    const url = "/goals";
+    interceptor
+      .post(url, payload)
       .then((response) => {
-        events.emit('add_toast', {
-          content: 'Goal added successfully',
-          type: 'success',
-        });
+        if (response) {
+          events.emit("add_toast", {
+            content: "Goal added successfully",
+            type: "success",
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -39,10 +42,11 @@ const actions = {
 
   // Setting all GOALS
   [types.GET_ALL_GOALS_ACTION]: ({ commit }) => {
-    const url = '/goals';
-    interceptor.get(url)
+    const url = "/goals";
+    interceptor
+      .get(url)
       .then((response) => {
-        commit(types.SET_ALL_GOALS, response.GOALS);
+        commit(types.SET_ALL_GOALS, response.goals);
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +56,8 @@ const actions = {
   // Set single goal data
   [types.GET_GOAL_DETAIL_ACTION]: ({ commit }, id) => {
     const url = `/goals/${id}`;
-    interceptor.get(url)
+    interceptor
+      .get(url)
       .then((response) => {
         commit(types.SET_GOAL_DETAIL, response.goal);
       })
@@ -64,12 +69,13 @@ const actions = {
   // Delete a goal
   [types.DELETE_GOAL_ACTION]: ({ commit }, id) => {
     const url = `/goals/${id}`;
-    interceptor.delete(url)
+    interceptor
+      .delete(url)
       .then((response) => {
         if (response) {
-          events.emit('add_toast', {
-            content: 'Goal deleted successfully',
-            type: 'success',
+          events.emit("add_toast", {
+            content: "Goal deleted successfully",
+            type: "success",
           });
         }
       })
@@ -81,12 +87,13 @@ const actions = {
   // Update a goal
   [types.UPDATE_GOAL_ACTION]: ({ commit }, payload) => {
     const url = `/goals/${payload._id}`;
-    interceptor.patch(url, payload)
+    interceptor
+      .patch(url, payload)
       .then((response) => {
         if (response) {
-          events.emit('add_toast', {
-            content: 'Goal updated successfully',
-            type: 'success',
+          events.emit("add_toast", {
+            content: "Goal updated successfully",
+            type: "success",
           });
         }
       })

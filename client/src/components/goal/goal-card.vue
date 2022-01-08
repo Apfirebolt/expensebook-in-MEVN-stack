@@ -1,10 +1,10 @@
 <template>
   <div class="p-2">
     <p class="truncate font-semibold text-center my-2">
-      {{ goal.note }}
+      {{ goal.title }}
     </p>
     <p class="truncate text-center">
-      {{ goal.amount }}
+      {{ goal.status }}
     </p>
     <div class="flex items-center justify-center my-2">
       <span class="mx-1 cursor-pointer" @click.prevent="editGoal">
