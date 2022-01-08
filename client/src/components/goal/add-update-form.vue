@@ -35,34 +35,45 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <t-input-group label="Goal Duration">
-          <t-select v-model="goalData.duration" placeholder="Select Duration" :options="durationChoices" name="Duration" />
+          <t-select
+            v-model="goalData.duration"
+            placeholder="Select Duration"
+            :options="durationChoices"
+            name="Duration"
+          />
         </t-input-group>
         <t-input-group label="Goal Status">
-          <t-select v-model="goalData.status" placeholder="Select Status" :options="statusChoices" name="Status" />
+          <t-select
+            v-model="goalData.status"
+            placeholder="Select Status"
+            :options="statusChoices"
+            name="Status"
+          />
         </t-input-group>
       </div>
-      <editor :value="goalData.content && goalData.content.html" placeholder="Your Goal Description" @update="handleContentUpdate" />
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+        <t-input-group label="Goal Desription (Optional)">
+          <t-textarea
+            v-model="goalData.content"
+            rows="10"
+            cols="60"
+            placeholder="Describe your goal in some detail"
+          >
+          </t-textarea>
+        </t-input-group>
+      </div>
 
       <div class="flex justify-between mt-6">
-        <t-button type="button" variant="error" @click="$emit('cancel')">
-          Cancel
-        </t-button>
-        <t-button type="submit">
-          Submit
-        </t-button>
+        <t-button type="button" variant="error" @click="$emit('cancel')"> Cancel </t-button>
+        <t-button type="submit"> Submit </t-button>
       </div>
     </form>
   </ValidationObserver>
 </template>
 
 <script>
-import Editor from '../common/editor.vue';
-
 export default {
-  name: 'AddUpdateGoalForm',
-  components: {
-    Editor,
-  },
+  name: "AddUpdateGoalForm",
   props: {
     goal: {
       type: Object,
@@ -72,10 +83,10 @@ export default {
   data() {
     return {
       goalData: {
-        content: '',
+        content: "",
       },
-      durationChoices: ['1 Month', '3 Months', '4 Months', '6 Months', '9 Months', '1 Year'],
-      statusChoices: ['In Progress', 'Completed', 'Not Yet Started'],
+      durationChoices: ["1 Month", "3 Months", "4 Months", "6 Months", "9 Months", "1 Year"],
+      statusChoices: ["In Progress", "Completed", "Not Yet Started"],
     };
   },
   mounted() {
@@ -86,9 +97,9 @@ export default {
   methods: {
     submitForm() {
       if (this.goal) {
-        this.$emit('updateGoal', this.goalData);
+        this.$emit("updateGoal", this.goalData);
       } else {
-        this.$emit('submit', this.goalData);
+        this.$emit("submit", this.goalData);
       }
     },
     handleContentUpdate(content) {

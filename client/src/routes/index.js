@@ -145,6 +145,34 @@ const routes = [
     ],
   },
   {
+    path: '/notifications',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'NotificationHome',
+        component: () => import('../views/notifications/home.vue'),
+      },
+    ],
+  },
+  {
+    path: '/investment',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'InvestmentHome',
+        component: () => import('../views/investment/home.vue'),
+      },
+    ],
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: () => import('../views/404.vue'),
