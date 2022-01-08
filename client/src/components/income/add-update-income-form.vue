@@ -2,30 +2,30 @@
   <ValidationObserver v-slot="{ handleSubmit }">
     <form class="font-medium text-gray-700" @submit.prevent="handleSubmit(submitForm)">
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
-        <ValidationProvider v-slot="{ errors }" name="Title" rules="required">
+        <ValidationProvider v-slot="{ errors }" name="Income Source" rules="required">
           <t-input-group
-            label="Title"
+            label="Income Source"
             :feedback="errors[0]"
             :variant="errors.length > 0 ? 'danger' : ''"
           >
-            <t-input
-              v-model="goalData.title"
-              type="text"
-              name="Title"
-              :variant="errors.length > 0 ? 'danger' : ''"
+            <t-select
+              v-model="incomeData.source"
+              placeholder="Select Income Source"
+              :options="sourceChoices"
+              name="Source"
             />
           </t-input-group>
         </ValidationProvider>
       </div>
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
-        <ValidationProvider v-slot="{ errors }" name="Goal Amount" rules="required">
+        <ValidationProvider v-slot="{ errors }" name="Income Amount" rules="required">
           <t-input-group
-            label="Goal Amount"
+            label="Enter Income Amount"
             :feedback="errors[0]"
             :variant="errors.length > 0 ? 'danger' : ''"
           >
             <t-input
-              v-model="goalData.amount"
+              v-model="incomeData.amount"
               type="number"
               name="Amount"
               :variant="errors.length > 0 ? 'danger' : ''"
@@ -33,31 +33,23 @@
           </t-input-group>
         </ValidationProvider>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
-        <t-input-group label="Goal Duration">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+        <t-input-group label="Income Duration">
           <t-select
-            v-model="goalData.duration"
+            v-model="incomeData.period"
             placeholder="Select Duration"
-            :options="durationChoices"
+            :options="periodChoices"
             name="Duration"
-          />
-        </t-input-group>
-        <t-input-group label="Goal Status">
-          <t-select
-            v-model="goalData.status"
-            placeholder="Select Status"
-            :options="statusChoices"
-            name="Status"
           />
         </t-input-group>
       </div>
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
-        <t-input-group label="Goal Desription (Optional)">
+        <t-input-group label="Income Desription">
           <t-textarea
-            v-model="goalData.content"
+            v-model="incomeData.content"
             rows="10"
             cols="60"
-            placeholder="Describe your goal in some detail"
+            placeholder="Describe your income in some detail"
           />
         </t-input-group>
       </div>
@@ -76,37 +68,37 @@
 
 <script>
 export default {
-  name: 'AddUpdateGoalForm',
+  name: 'AddUpdateIncomeForm',
   props: {
-    goal: {
+    income: {
       type: Object,
       required: false,
     },
   },
   data() {
     return {
-      goalData: {
+      incomeData: {
         content: '',
       },
-      durationChoices: ['1 Month', '3 Months', '4 Months', '6 Months', '9 Months', '1 Year'],
-      statusChoices: ['In Progress', 'Completed', 'Not Yet Started'],
+      periodChoices: ['1 Month', '3 Months', '6 Months', '1 Year', 'NA'],
+      sourceChoices: ['Monthly Full-Time Salary', 'Freelance', 'Investment', 'Other'],
     };
   },
   mounted() {
-    if (this.goal) {
-      this.goalData = this.goal;
+    if (this.income) {
+      this.incomeData = this.income;
     }
   },
   methods: {
     submitForm() {
-      if (this.goal) {
-        this.$emit('updateGoal', this.goalData);
+      if (this.income) {
+        this.$emit('updateIncome', this.incomeData);
       } else {
-        this.$emit('submit', this.goalData);
+        this.$emit('submit', this.incomeData);
       }
     },
     handleContentUpdate(content) {
-      this.goalData = {
+      this.incomeData = {
         content,
       };
     },

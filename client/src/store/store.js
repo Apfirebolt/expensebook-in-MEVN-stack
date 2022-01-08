@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import auth from './modules/auth/auth';
 import expense from './modules/expense/expense';
 import goal from './modules/goal/goal';
+import income from './modules/income/income';
 
 Vue.use(Vuex);
 
@@ -11,5 +12,6 @@ export const store = new Vuex.Store({
     auth,
     expense,
     goal,
+    income,
   },
 });
