@@ -24,9 +24,8 @@
       Dashboard
     </a>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+    <router-link :to="{ name: 'ExpenseHome' }"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
     >
       <!-- Heroicon name: outline/users -->
       <svg
@@ -45,11 +44,10 @@
         />
       </svg>
       Expense
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+    <router-link :to="{ name: 'GoalsHome' }"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
     >
       <!-- Heroicon name: outline/folder -->
       <svg
@@ -68,11 +66,10 @@
         />
       </svg>
       Goals
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+    <router-link :to="{ name: 'CalendarHome' }"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
     >
       <!-- Heroicon name: outline/calendar -->
       <svg
@@ -91,11 +88,10 @@
         />
       </svg>
       Expense Calendar
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+    <router-link :to="{ name: 'ExpenseBookHome' }"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
     >
       <!-- Heroicon name: outline/inbox -->
       <svg
@@ -114,11 +110,10 @@
         />
       </svg>
       Expense Book
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+    <router-link :to="{ name: 'ReportsHome' }"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
     >
       <!-- Heroicon name: outline/chart-bar -->
       <svg
@@ -137,11 +132,10 @@
         />
       </svg>
       Reports
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+    <router-link :to="{ name: 'IncomeHome' }"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
     >
       <!-- Heroicon name: outline/chart-bar -->
       <svg
@@ -160,11 +154,11 @@
         />
       </svg>
       Income
-    </a>
+    </router-link>
   </nav>
 </template>
 <script>
 export default {
-  name: "MobileMenu",
+  name: 'MobileMenu',
 };
 </script>

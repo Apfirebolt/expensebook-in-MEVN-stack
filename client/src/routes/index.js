@@ -61,6 +61,90 @@ const routes = [
     ],
   },
   {
+    path: '/expenses',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'ExpenseHome',
+        component: () => import('../views/expense/home.vue'),
+      },
+    ],
+  },
+  {
+    path: '/goals',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'GoalsHome',
+        component: () => import('../views/goals/home.vue'),
+      },
+    ],
+  },
+  {
+    path: '/expense-book',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'ExpenseBookHome',
+        component: () => import('../views/expense-book/home.vue'),
+      },
+    ],
+  },
+  {
+    path: '/calendar',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'CalendarHome',
+        component: () => import('../views/calendar/home.vue'),
+      },
+    ],
+  },
+  {
+    path: '/income',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'IncomeHome',
+        component: () => import('../views/income/home.vue'),
+      },
+    ],
+  },
+  {
+    path: '/reports',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'ReportsHome',
+        component: () => import('../views/reports/home.vue'),
+      },
+    ],
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: () => import('../views/404.vue'),

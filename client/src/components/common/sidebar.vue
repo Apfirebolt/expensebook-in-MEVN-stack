@@ -1,9 +1,8 @@
 <template>
   <nav class="mt-5 flex-1 px-2 space-y-1">
     <!-- Current: "bg-indigo-800 text-white", Default: "text-white hover:bg-indigo-600 hover:bg-opacity-75" -->
-    <a
-      href="#"
-      class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'Home'}"
+                 class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/home -->
       <svg
@@ -22,11 +21,10 @@
         />
       </svg>
       Dashboard
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'ExpenseHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/users -->
       <svg
@@ -45,11 +43,10 @@
         />
       </svg>
       Expense
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'GoalsHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/folder -->
       <svg
@@ -68,11 +65,11 @@
         />
       </svg>
       Goals
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'CalendarHome'}"
+                 href="#"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/calendar -->
       <svg
@@ -91,11 +88,10 @@
         />
       </svg>
       Calendar
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'ExpenseBookHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/inbox -->
       <svg
@@ -114,11 +110,10 @@
         />
       </svg>
       Expense Book
-    </a>
+    </router-link>
 
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    <router-link :to="{ name: 'ReportsHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/chart-bar -->
       <svg
@@ -137,10 +132,9 @@
         />
       </svg>
       Reports
-    </a>
-    <a
-      href="#"
-      class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    </router-link>
+    <router-link :to="{ name: 'IncomeHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >
       <!-- Heroicon name: outline/chart-bar -->
       <svg
@@ -159,11 +153,11 @@
         />
       </svg>
       Income
-    </a>
+    </router-link>
   </nav>
 </template>
 <script>
 export default {
-  name: "DesktopMenu",
+  name: 'DesktopMenu',
 };
 </script>

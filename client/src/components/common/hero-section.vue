@@ -15,7 +15,7 @@
         role="dialog"
         aria-modal="true"
       >
-        <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+        <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true" />
 
         <div class="relative flex-1 flex flex-col max-w-xs w-full bg-indigo-700">
           <!--
@@ -60,7 +60,7 @@
                 class="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                 alt="Workflow"
-              />
+              >
             </div>
             <mobile-menu-component />
           </div>
@@ -72,7 +72,7 @@
                     class="inline-block h-10 w-10 rounded-full"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
-                  />
+                  >
                 </div>
                 <div class="ml-3">
                   <p class="text-base font-medium text-white">Tom Cook</p>
@@ -101,7 +101,7 @@
               class="h-8 w-auto"
               src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
               alt="Workflow"
-            />
+            >
           </div>
           <desktop-sidebar-component />
         </div>
@@ -113,7 +113,7 @@
                   class="inline-block h-9 w-9 rounded-full"
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   alt=""
-                />
+                >
               </div>
               <div class="ml-3">
                 <p class="text-sm font-medium text-white">Tom Cook</p>
@@ -155,12 +155,14 @@
       <main class="flex-1">
         <div class="py-6">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+            <h1 class="text-2xl font-semibold text-gray-900">
+              {{ message }}
+            </h1>
           </div>
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
             <!-- Replace with your content -->
             <div class="py-4">
-              <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
+              <div class="border-4 border-dashed border-gray-200 rounded-lg h-96" />
             </div>
             <!-- /End replace -->
           </div>
@@ -170,14 +172,14 @@
   </div>
 </template>
 <script>
-import DesktopSidebarComponent from "./sidebar.vue";
-import MobileMenuComponent from "./mobile-menu.vue";
+import DesktopSidebarComponent from './sidebar.vue';
+import MobileMenuComponent from './mobile-menu.vue';
 
 export default {
-  name: "HeroSection",
+  name: 'HeroSection',
   components: {
     DesktopSidebarComponent,
-    MobileMenuComponent
+    MobileMenuComponent,
   },
   props: {
     message: {
@@ -192,7 +194,7 @@ export default {
   },
   methods: {
     closeSidebar() {
-      console.log("Called..");
+      console.log('Called..');
       this.showSidebar = !this.showSidebar;
     },
   },

@@ -5,10 +5,11 @@ import Expense from "../models/expenseModel.js";
 // @route   POST /api/expenses
 // @access  Private
 const createExpense = asyncHandler(async (req, res) => {
-    const { note, amount } = req.body;
+    const { note, amount, date } = req.body;
     const expense = await Expense.create({
         note,
         amount,
+        date,
         createdBy: req.user._id,
     });
     if (expense) {
@@ -23,19 +24,14 @@ const createExpense = asyncHandler(async (req, res) => {
 // @route   PATCH /api/expenses/:id
 // @access  Private
 const updateExpense = asyncHandler(async (req, res) => {
-  const { amount, note } = req.body;
+  const { amount, note, date } = req.body;
 
-  const expense = await Expense.findOne({
-      createdBy: req.user._id,
-      id: req.params.id
-  })
+  const expense = await Expense.findOneAndUpdate({ createdBy: req.user._id, _id: req.params.id }, req.body, {
+    new: true,
+  });
 
   if (expense) {
-    expense.amount = amount || expense.amount
-    expense.note = note || expense.note 
-
-    const updatedExpense = await expense.save()
-    res.json(updatedExpense)
+    res.json(expense)
   } else {
     res.status(404)
     throw new Error('Expense not found')
