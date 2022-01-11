@@ -6,7 +6,7 @@
           <img class="h-8 w-auto sm:h-10" src="https://raw.githubusercontent.com/aleksandryackovlev/openapi-mock-express-middleware/master/assets/express-logo.png" alt="">
         </a>
         <router-link :to="{name: 'Dashboard'}" class="font-semibold text-gray-500 mx-2 text-lg cursor-pointer">
-          Express Vue Auth
+          Expense Book
         </router-link>
       </div>
       <div class="md:flex-1">

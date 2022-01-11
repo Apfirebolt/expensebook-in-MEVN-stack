@@ -154,6 +154,27 @@
       </svg>
       Income
     </router-link>
+    <router-link :to="{ name: 'BorrowHome'}"
+                 class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+    >
+      <!-- Heroicon name: outline/chart-bar -->
+      <svg
+        class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      Borrow
+    </router-link>
     <router-link :to="{ name: 'InvestmentHome'}"
                  class="text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
     >

@@ -173,6 +173,20 @@ const routes = [
     ],
   },
   {
+    path: '/borrow',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'BorrowHome',
+        component: () => import('../views/borrow/home.vue'),
+      },
+    ],
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: () => import('../views/404.vue'),
