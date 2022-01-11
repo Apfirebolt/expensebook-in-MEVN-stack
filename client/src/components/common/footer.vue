@@ -40,7 +40,7 @@
       </div>
       <div class="mt-8 md:mt-0 md:order-1 md:ml-64">
         <p class="text-center text-base text-indigo-400">
-          &copy; 2021 Express Vue Boilerplate, Inc. All rights reserved.
+          &copy; 2022 ExpenseBook, Inc. All rights reserved.
         </p>
       </div>
     </div>

@@ -1,13 +1,22 @@
 <template>
   <div class="p-2">
     <p class="truncate font-semibold text-center my-2">
-      {{ expense.note }}
+      {{ borrow.borrowedFrom }}
+    </p>
+    <p class="truncate font-semibold text-center my-2">
+      {{ borrow.note }}
+    </p>
+    <p class="text-center">
+      {{ borrow.amount }}
     </p>
     <p class="truncate text-center">
-      {{ expense.amount }}
+      Borrowed on {{ borrow.borrowedOn | formatDateString }}
+    </p>
+    <p class="truncate text-center">
+      Pay on {{ borrow.repayOn | formatDateString }}
     </p>
     <div class="flex items-center justify-center my-2">
-      <span class="mx-1 cursor-pointer" @click.prevent="editExpense">
+      <span class="mx-1 cursor-pointer" @click.prevent="editBorrow">
         <svg
           class="w-6 h-6"
           fill="none"
@@ -23,7 +32,7 @@
           />
         </svg>
       </span>
-      <span class="mx-1 cursor-pointer" @click.prevent="deleteExpense">
+      <span class="mx-1 cursor-pointer" @click.prevent="deleteBorrow">
         <svg
           class="w-6 h-6"
           fill="none"
@@ -45,19 +54,19 @@
 
 <script>
 export default {
-  name: 'ExpenseCard',
+  name: 'BorrowCard',
   props: {
-    expense: {
+    borrow: {
       type: Object,
       required: true,
     },
   },
   methods: {
-    deleteExpense() {
-      this.$emit('deleteExpense', this.expense._id);
+    deleteBorrow() {
+      this.$emit('deleteBorrow', this.borrow._id);
     },
-    editExpense() {
-      this.$emit('updateExpense', this.expense._id);
+    editBorrow() {
+      this.$emit('updateBorrow', this.borrow._id);
     },
   },
 };
