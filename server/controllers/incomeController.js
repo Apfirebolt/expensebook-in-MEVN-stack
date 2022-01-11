@@ -5,12 +5,13 @@ import Income from "../models/IncomeModel.js";
 // @route   POST /api/income
 // @access  Private
 const createIncome = asyncHandler(async (req, res) => {
-  const { source, content, period, amount } = req.body;
+  const { source, content, period, amount, date } = req.body;
   const income = await Income.create({
     source,
     content,
     period,
     amount,
+    date,
     createdBy: req.user._id,
   });
   if (income) {
