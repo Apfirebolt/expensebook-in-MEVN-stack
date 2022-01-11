@@ -1,10 +1,10 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddBorrowModalOpened" header="Add Borrow">
-      <add-Borrow-form @submit="addBorrow" />
+      <add-borrow-form @submit="addBorrow" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Borrow">
-      <update-Borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" />
+      <update-borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
       <confirm-modal :message="deleteMessage" @confirm="deleteBorrow" />
@@ -177,7 +177,7 @@
               <div class="my-2 border-4 border-dashed border-gray-200 px-2 py-4 rounded-lg">
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
                   <div v-for="borrow in allBorrowings" :key="borrow._id">
-                    <Borrow-card :borrow="borrow" @deleteBorrow="openConfirmDeleteModal" @updateBorrow="openUpdateBorrowModal" />
+                    <borrow-card :borrow="borrow" @deleteBorrow="openConfirmDeleteModal" @updateBorrow="openUpdateBorrowModal" />
                   </div>
                 </div>
               </div>
@@ -236,7 +236,9 @@ export default {
     }),
     addBorrow(payload) {
       const formattedPayload = {
-        date: payload.date,
+        borrowedOn: payload.borrowedOn,
+        repayOn: payload.repayOn,
+        borrowedFrom: payload.borrowedFrom,
         amount: payload.amount,
         note: payload.note,
       };

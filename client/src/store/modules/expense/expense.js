@@ -1,7 +1,7 @@
+import axios from 'axios';
 import * as types from './expense-types';
 import events from '../../../plugins/events';
 import interceptor from '../../../plugins/interceptor';
-import axios from 'axios';
 
 const state = {
   expense: null,

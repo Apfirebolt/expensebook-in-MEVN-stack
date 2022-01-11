@@ -53,9 +53,6 @@ export default {
     },
   },
   methods: {
-    submitForm() {
-      this.$emit('submit', this.expenseData);
-    },
     deleteExpense() {
       this.$emit('deleteExpense', this.expense._id);
     },

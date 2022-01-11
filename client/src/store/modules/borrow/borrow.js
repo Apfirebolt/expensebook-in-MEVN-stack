@@ -1,6 +1,6 @@
-import * as types from "./borrow-types";
-import events from "../../../plugins/events";
-import interceptor from "../../../plugins/interceptor";
+import * as types from './borrow-types';
+import events from '../../../plugins/events';
+import interceptor from '../../../plugins/interceptor';
 
 const state = {
   borrow: null,
@@ -24,14 +24,14 @@ const mutations = {
 const actions = {
   // Create Borrow Action
   [types.CREATE_BORROW_ACTION]: ({ commit }, payload) => {
-    const url = "/borrow";
+    const url = '/borrow';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Borrow added successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Borrow added successfully',
+            type: 'success',
           });
         }
       })
@@ -42,11 +42,11 @@ const actions = {
 
   // Setting all borrowings
   [types.GET_ALL_BORROWINGS_ACTION]: ({ commit }) => {
-    const url = "/borrow";
+    const url = '/borrow';
     interceptor
       .get(url)
       .then((response) => {
-        commit(types.SET_ALL_BORROWINGS, response.borrowings);
+        commit(types.SET_ALL_BORROWINGS, response.borrowing);
       })
       .catch((err) => {
         console.log(err);
@@ -73,9 +73,9 @@ const actions = {
       .delete(url)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Borrow deleted successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Borrow deleted successfully',
+            type: 'success',
           });
         }
       })
@@ -91,9 +91,9 @@ const actions = {
       .patch(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Borrowing updated successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Borrowing updated successfully',
+            type: 'success',
           });
         }
       })

@@ -18,22 +18,6 @@
         </ValidationProvider>
       </div>
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
-        <ValidationProvider v-slot="{ errors }" name="Note" rules="required">
-          <t-input-group
-            label="Note"
-            :feedback="errors[0]"
-            :variant="errors.length > 0 ? 'danger' : ''"
-          >
-            <t-input
-              v-model="expenseData.note"
-              type="text"
-              name="Title"
-              :variant="errors.length > 0 ? 'danger' : ''"
-            />
-          </t-input-group>
-        </ValidationProvider>
-      </div>
-      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <ValidationProvider v-slot="{ errors }" name="Amount" rules="required">
           <t-input-group
             label="Borrow Amount"
@@ -73,7 +57,7 @@
         <t-input-group label="Borrow Desription (Optional)">
           <t-textarea
             v-model="borrowData.note"
-            rows="10"
+            rows="5"
             cols="60"
             placeholder="Add a Note related to this borrowing"
           />

@@ -4,9 +4,9 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import App from './App.vue';
 import events from './plugins/events';
 import interceptor from './plugins/interceptor';
+import './plugins/filters';
 import router from './routes/index';
 import { store } from './store/store';
-import * as authTypes from './store/modules/auth/auth-types';
 
 import VueTailwindSettings from './plugins/vue-tailwind';
 import './plugins/validate';
