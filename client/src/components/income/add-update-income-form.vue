@@ -17,6 +17,17 @@
           </t-input-group>
         </ValidationProvider>
       </div>
+      <div v-if="incomeData.period === 'One Time'" class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+        <ValidationProvider v-slot="{ errors }" name="Income Date">
+          <t-input-group
+            label="Income Date"
+            :feedback="errors[0]"
+            :variant="errors.length > 0 ? 'danger' : ''"
+          >
+            <t-datepicker v-model="incomeData.date" />
+          </t-input-group>
+        </ValidationProvider>
+      </div>
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <ValidationProvider v-slot="{ errors }" name="Income Amount" rules="required">
           <t-input-group
@@ -80,7 +91,7 @@ export default {
       incomeData: {
         content: '',
       },
-      periodChoices: ['1 Month', '3 Months', '6 Months', '1 Year', 'NA'],
+      periodChoices: ['1 Month', '3 Months', '6 Months', '1 Year', 'One Time', 'NA'],
       sourceChoices: ['Monthly Full-Time Salary', 'Freelance', 'Investment', 'Other'],
     };
   },

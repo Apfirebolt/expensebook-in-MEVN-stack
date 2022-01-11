@@ -5,7 +5,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: 'Express Auth in Vue',
+      title: 'Expense Book',
     },
   },
   publicPath: '',

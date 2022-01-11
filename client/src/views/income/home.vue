@@ -240,6 +240,7 @@ export default {
         content: payload.content,
         duration: payload.period,
         amount: payload.amount,
+        date: payload.period === 'One Time' ? payload.date : undefined 
       };
       this.addIncomeAction(formattedPayload);
       this.isAddIncomeModalOpened = false;
