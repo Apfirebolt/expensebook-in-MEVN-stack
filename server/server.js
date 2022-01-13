@@ -10,6 +10,7 @@ import expenseRoutes from './routes/expenseRoutes.js'
 import goalRoutes from './routes/goalRoutes.js'
 import incomeRoutes from './routes/incomeRoutes.js'
 import borrowRoutes from './routes/borrowRoutes.js'
+import investmentRoutes from './routes/investmentRoutes.js'
 
 dotenv.config()
 
@@ -30,6 +31,7 @@ app.use('/api/expense', expenseRoutes)
 app.use('/api/goals', goalRoutes)
 app.use('/api/income', incomeRoutes)
 app.use('/api/borrow', borrowRoutes)
+app.use('/api/investments', investmentRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))
