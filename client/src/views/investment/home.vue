@@ -236,9 +236,13 @@ export default {
     }),
     addInvestment(payload) {
       const formattedPayload = {
-        date: payload.date,
+        type: payload.type,
+        assetName: payload.assetName,
+        description: payload.description,
+        duration: payload.duration,
+        startDate: payload.startDate,
+        endDate: payload.endDate,
         amount: payload.amount,
-        note: payload.note,
       };
       this.addInvestmentAction(formattedPayload);
       this.isAddInvestmentModalOpened = false;
