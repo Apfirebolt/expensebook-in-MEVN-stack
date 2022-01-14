@@ -6,6 +6,7 @@ import goal from './modules/goal/goal';
 import income from './modules/income/income';
 import borrow from './modules/borrow/borrow';
 import investment from './modules/investment/investment';
+import policy from './modules/policy/policy';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export const store = new Vuex.Store({
     goal,
     income,
     borrow,
-    investment
+    investment,
+    policy
   },
 });
