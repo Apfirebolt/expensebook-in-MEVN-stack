@@ -6,6 +6,10 @@ const policySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    vendorName: {
+      type: String,
+      required: false,
+    },
     premiumPeriod: {
       type: String,
       required: true,
@@ -20,11 +24,11 @@ const policySchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     premiumDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

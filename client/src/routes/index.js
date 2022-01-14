@@ -173,6 +173,20 @@ const routes = [
     ],
   },
   {
+    path: '/policy',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'PolicyHome',
+        component: () => import('../views/policy/home.vue'),
+      },
+    ],
+  },
+  {
     path: '/borrow',
     meta: {
       requiresAuth: true,

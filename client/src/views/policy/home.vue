@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
-    <t-modal v-model="isAddIncomeModalOpened" header="Add Income">
-      <add-income-form @submit="addIncome" />
+    <t-modal v-model="isAddPolicyModalOpened" header="Add Policy">
+      <add-policy-form @submit="addPolicy" />
     </t-modal>
-    <t-modal v-model="isUpdateModalOpened" header="Update Income">
-      <update-income-form :income="selectedIncome" @updateIncome="updateIncome" />
+    <t-modal v-model="isUpdateModalOpened" header="Update Policy">
+      <update-policy-form :policy="selectedPolicy" @updatePolicy="updatePolicy" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteIncome" />
+      <confirm-modal :message="deleteMessage" @confirm="deletePolicy" />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
@@ -166,18 +166,18 @@
           <div class="py-6">
             <div class="max-w-7xl flex justify-between mx-auto px-4 sm:px-6 md:px-8">
               <h1 class="text-2xl font-semibold text-gray-900">
-                Income
+                Policy
               </h1>
-              <t-button @click="isAddIncomeModalOpened = true">
-                Add Income
+              <t-button @click="isAddPolicyModalOpened = true">
+                Add Policy
               </t-button>
             </div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
               <!-- Replace with your content -->
               <div class="my-2 border-4 border-dashed border-gray-200 px-2 py-4 rounded-lg">
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
-                  <div v-for="income in allIncomes" :key="income._id">
-                    <income-card :income="income" @deleteIncome="openConfirmDeleteModal" @updateIncome="openUpdateIncomeModal" />
+                  <div v-for="policy in allPolicies" :key="policy._id">
+                    <policy-card :policy="policy" @deletePolicy="openConfirmDeleteModal" @updatePolicy="openUpdatePolicyModal" />
                   </div>
                 </div>
               </div>
@@ -191,82 +191,85 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import * as incomeTypes from '../../store/modules/income/income-types';
-import AddIncomeForm from '../../components/income/add-update-income-form.vue';
-import UpdateIncomeForm from '../../components/income/add-update-income-form.vue';
-import IncomeCard from '../../components/income/income-card-component.vue';
+import * as policyTypes from '../../store/modules/policy/policy-types';
+import AddPolicyForm from '../../components/policy/add-update-form.vue';
+import UpdatePolicyForm from '../../components/policy/add-update-form.vue';
+import PolicyCard from '../../components/policy/policy-card.vue';
 import DesktopSidebarComponent from '../../components/common/sidebar.vue';
 import MobileMenuComponent from '../../components/common/mobile-menu.vue';
 import ConfirmModal from '../../components/common/confirm-modal.vue';
 
 export default {
-  name: 'IncomeHome',
+  name: 'PolicyHome',
   components: {
-    AddIncomeForm,
-    UpdateIncomeForm,
+    AddPolicyForm,
+    UpdatePolicyForm,
     DesktopSidebarComponent,
     MobileMenuComponent,
-    IncomeCard,
+    PolicyCard,
     ConfirmModal,
   },
   data() {
     return {
-      isAddIncomeModalOpened: false,
+      isAddPolicyModalOpened: false,
       showSidebar: true,
       isConfirmModalOpened: false,
       isUpdateModalOpened: false,
-      selectedIncome: null,
+      selectedPolicy: null,
       deleteMessage: '',
     };
   },
   computed: {
     ...mapGetters({
-      allIncomes: incomeTypes.GET_ALL_INCOME,
+      allPolicies: policyTypes.GET_ALL_POLICIES,
     }),
   },
   mounted() {
-    this.getAllIncomes();
+    this.getAllPolicies();
   },
   methods: {
     ...mapActions({
-      addIncomeAction: incomeTypes.CREATE_INCOME_ACTION,
-      updateIncomeAction: incomeTypes.UPDATE_INCOME_ACTION,
-      deleteIncomeAction: incomeTypes.DELETE_INCOME_ACTION,
-      getAllIncomes: incomeTypes.GET_ALL_INCOME_ACTION,
+      addPolicyAction: policyTypes.CREATE_POLICY_ACTION,
+      updatePolicyAction: policyTypes.UPDATE_POLICY_ACTION,
+      deletePolicyAction: policyTypes.DELETE_POLICY_ACTION,
+      getAllPolicies: policyTypes.GET_ALL_POLICIES_ACTION,
     }),
-    addIncome(payload) {
+    addPolicy(payload) {
       const formattedPayload = {
-        source: payload.source,
-        content: payload.content,
-        duration: payload.period,
-        amount: payload.amount,
-        date: payload.period === 'One Time' ? payload.date : undefined,
+        name: payload.name,
+        vendorName: payload.vendorName,
+        premiumAmount: payload.premiumAmount,
+        coverAmount: payload.coverAmount,
+        premiumPeriod: payload.premiumPeriod,
+        description: payload.description,
+        duration: payload.duration,
+        premiumDate: payload.premiumDate,
       };
-      this.addIncomeAction(formattedPayload);
-      this.isAddIncomeModalOpened = false;
-      this.getAllIncomes();
+      this.addPolicyAction(formattedPayload);
+      this.isAddPolicyModalOpened = false;
+      this.getAllPolicies();
     },
     closeSidebar() {
       this.showSidebar = !this.showSidebar;
     },
-    deleteIncome() {
+    deletePolicy() {
       this.isConfirmModalOpened = false;
-      this.deleteIncomeAction(this.selectedIncome._id);
-      this.getAllIncomes();
+      this.deletePolicyAction(this.selectedPolicy._id);
+      this.getAllPolicies();
     },
-    openUpdateIncomeModal(id) {
+    openUpdatePolicyModal(id) {
       this.isUpdateModalOpened = true;
-      this.selectedIncome = this.allIncomes.find((item) => item._id === id);
+      this.selectedPolicy = this.allPolicies.find((item) => item._id === id);
     },
-    updateIncome() {
+    updatePolicy() {
       this.isUpdateModalOpened = false;
-      this.updateIncomeAction(this.selectedIncome);
-      this.getAllIncomes();
+      this.updatePolicyAction(this.selectedPolicy);
+      this.getAllPolicies();
     },
     openConfirmDeleteModal(id) {
       this.isConfirmModalOpened = true;
-      this.selectedIncome = this.allIncomes.find((item) => item._id === id);
-      this.deleteMessage = `Are you sure you want to delete Income title "${this.selectedIncome.source}" ?`;
+      this.selectedPolicy = this.allPolicies.find((item) => item._id === id);
+      this.deleteMessage = `Are you sure you want to delete policy of ${this.selectedPolicy.amount} ?`;
     },
   },
 };

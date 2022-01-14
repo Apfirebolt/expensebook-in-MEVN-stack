@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import Policy from "../models/investmentModel.js";
+import Policy from "../models/policyModel.js";
 
 // @desc    Create a Policy for logged in users
 // @route   POST /api/policies
@@ -15,7 +15,7 @@ const createPolicy = asyncHandler(async (req, res) => {
     links,
     premiumPeriod,
   } = req.body;
-  const investment = await Policy.create({
+  const policy = await Policy.create({
     name,
     vendorName,
     premiumPeriod,
@@ -26,11 +26,11 @@ const createPolicy = asyncHandler(async (req, res) => {
     links,
     createdBy: req.user._id,
   });
-  if (investment) {
-    res.status(201).json(investment);
+  if (policy) {
+    res.status(201).json(policy);
   } else {
     res.status(400);
-    throw new Error("Invalid investment data");
+    throw new Error("Invalid policy data");
   }
 });
 
@@ -38,7 +38,7 @@ const createPolicy = asyncHandler(async (req, res) => {
 // @route   PATCH /api/policies/:id
 // @access  Private
 const updatePolicy = asyncHandler(async (req, res) => {
-  const investment = await Policy.findOneAndUpdate(
+  const policy = await Policy.findOneAndUpdate(
     { createdBy: req.user._id, _id: req.params.id },
     req.body,
     {
@@ -46,8 +46,8 @@ const updatePolicy = asyncHandler(async (req, res) => {
     }
   );
 
-  if (investment) {
-    res.json(investment);
+  if (policy) {
+    res.json(policy);
   } else {
     res.status(404);
     throw new Error("Policy not found");
@@ -85,8 +85,8 @@ const getAllPolicies = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc    Delete user investment
-// @route   DELETE /api/investment/:id
+// @desc    Delete user policy
+// @route   DELETE /api/policy/:id
 // @access  Private
 const deletePolicy = asyncHandler(async (req, res) => {
   const isPolicyDeleted = await Policy.deleteOne(

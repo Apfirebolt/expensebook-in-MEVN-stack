@@ -1,6 +1,6 @@
-import * as types from "./investment-types";
-import events from "../../../plugins/events";
-import interceptor from "../../../plugins/interceptor";
+import * as types from './investment-types';
+import events from '../../../plugins/events';
+import interceptor from '../../../plugins/interceptor';
 
 const state = {
   investment: null,
@@ -24,14 +24,14 @@ const mutations = {
 const actions = {
   // Create Investment Action
   [types.CREATE_INVESTMENT_ACTION]: ({ commit }, payload) => {
-    const url = "/investments";
+    const url = '/investments';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Investment added successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Investment added successfully',
+            type: 'success',
           });
         }
       })
@@ -42,7 +42,7 @@ const actions = {
 
   // Setting all investments
   [types.GET_ALL_INVESTMENTS_ACTION]: ({ commit }) => {
-    const url = "/investments";
+    const url = '/investments';
     interceptor
       .get(url)
       .then((response) => {
@@ -73,9 +73,9 @@ const actions = {
       .delete(url)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Investment deleted successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Investment deleted successfully',
+            type: 'success',
           });
         }
       })
@@ -91,9 +91,9 @@ const actions = {
       .patch(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Investment updated successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Investment updated successfully',
+            type: 'success',
           });
         }
       })

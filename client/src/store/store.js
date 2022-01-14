@@ -18,6 +18,6 @@ export const store = new Vuex.Store({
     income,
     borrow,
     investment,
-    policy
+    policy,
   },
 });

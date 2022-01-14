@@ -1,6 +1,6 @@
-import * as types from "./policy-types";
-import events from "../../../plugins/events";
-import interceptor from "../../../plugins/interceptor";
+import * as types from './policy-types';
+import events from '../../../plugins/events';
+import interceptor from '../../../plugins/interceptor';
 
 const state = {
   policy: null,
@@ -22,16 +22,16 @@ const mutations = {
 };
 
 const actions = {
-  // Create Investment Action
+  // Create Policy Action
   [types.CREATE_POLICY_ACTION]: ({ commit }, payload) => {
-    const url = "/policies";
+    const url = '/policies';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Investment added successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Policy added successfully',
+            type: 'success',
           });
         }
       })
@@ -42,7 +42,7 @@ const actions = {
 
   // Setting all policies
   [types.GET_ALL_POLICIES_ACTION]: ({ commit }) => {
-    const url = "/policies";
+    const url = '/policies';
     interceptor
       .get(url)
       .then((response) => {
@@ -73,9 +73,9 @@ const actions = {
       .delete(url)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Investment deleted successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Policy deleted successfully',
+            type: 'success',
           });
         }
       })
@@ -91,9 +91,9 @@ const actions = {
       .patch(url, payload)
       .then((response) => {
         if (response) {
-          events.emit("add_toast", {
-            content: "Investment updated successfully",
-            type: "success",
+          events.emit('add_toast', {
+            content: 'Policy updated successfully',
+            type: 'success',
           });
         }
       })

@@ -1,7 +1,7 @@
 <template>
   <ValidationObserver v-slot="{ handleSubmit }">
     <form class="font-medium text-gray-700" @submit.prevent="handleSubmit(submitForm)">
-       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <t-input-group label="Asset Type">
           <t-select
             v-model="investmentData.type"
@@ -43,7 +43,7 @@
           </t-input-group>
         </ValidationProvider>
       </div>
-       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <t-input-group label="Investment Duration">
           <t-select
             v-model="investmentData.duration"
