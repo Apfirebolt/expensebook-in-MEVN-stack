@@ -1,10 +1,19 @@
 <template>
-  <div class="p-2">
+  <div class="p-2 bg-blue-600 text-white rounded">
+    <p class="truncate bg-green-500 p-2 font-semibold text-center my-2">
+      {{ policy.vendorName }} - {{ policy.name }}
+    </p>
     <p class="truncate font-semibold text-center my-2">
       {{ policy.description }}
     </p>
-    <p class="truncate text-center">
-      {{ policy.amount }}
+    <p class="truncate my-1 text-center">
+      Policy Premium Period : {{ policy.premiumPeriod }}
+    </p>
+    <p class="truncate my-1 text-center">
+      Cover Amount : Rs {{ policy.coverAmount }}
+    </p>
+    <p class="truncate my-1 text-center">
+      Premium Amount : Rs {{ policy.premiumAmount }}
     </p>
     <div class="flex items-center justify-center my-2">
       <span class="mx-1 cursor-pointer" @click.prevent="editPolicy">

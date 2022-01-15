@@ -1,5 +1,11 @@
 <template>
-  <div class="p-2">
+  <div class="p-2 bg-indigo-700 text-white rounded">
+    <p class="truncate bg-green-500 p-2 font-semibold text-center my-2">
+      {{ investment.type }}
+    </p>
+    <p class="truncate font-semibold text-center my-2">
+      Asset Name : {{ investment.assetName }}
+    </p>
     <p class="truncate font-semibold text-center my-2">
       {{ investment.description }}
     </p>
