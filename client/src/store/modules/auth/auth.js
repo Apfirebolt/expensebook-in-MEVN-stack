@@ -56,7 +56,7 @@ const actions = {
         router.push({ name: 'Dashboard' });
       })
       .catch((err) => {
-
+        console.log(err);
       });
   },
 
@@ -94,6 +94,22 @@ const actions = {
     interceptor.get(url)
       .then((response) => {
         commit(types.SET_PROFILE_DATA, response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+
+  // Update the profile settings of logged in user
+  [types.UPDATE_PROFILE_SETTINGS]: ({ commit }, payload) => {
+    const url = 'users/profile';
+    interceptor.patch(url, payload)
+      .then((response) => {
+        commit(types.SET_PROFILE_DATA, response);
+        events.emit('add_toast', {
+          content: 'Profile settings updated successfully',
+          type: 'success',
+        });
       })
       .catch((err) => {
         console.error(err);

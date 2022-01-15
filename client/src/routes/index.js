@@ -173,6 +173,20 @@ const routes = [
     ],
   },
   {
+    path: '/profile',
+    meta: {
+      requiresAuth: true,
+    },
+    component: DashboardLayout,
+    children: [
+      {
+        path: '',
+        name: 'Profile',
+        component: () => import('../views/auth/profile.vue'),
+      },
+    ],
+  },
+  {
     path: '/policy',
     meta: {
       requiresAuth: true,
