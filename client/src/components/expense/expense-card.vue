@@ -1,10 +1,13 @@
 <template>
-  <div class="p-2">
+  <div class="p-2 bg-red-200 rounded">
     <p class="truncate font-semibold text-center my-2">
       {{ expense.note }}
     </p>
-    <p class="truncate text-center">
-      {{ expense.amount }}
+    <p class="truncate text-center my-1">
+      Rs {{ expense.amount }}
+    </p>
+    <p class="truncate text-center my-1">
+      Spent on {{ expense.date | formatDateString }}
     </p>
     <div class="flex items-center justify-center my-2">
       <span class="mx-1 cursor-pointer" @click.prevent="editExpense">

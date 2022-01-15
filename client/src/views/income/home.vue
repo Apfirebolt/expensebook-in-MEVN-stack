@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddIncomeModalOpened" header="Add Income">
-      <add-income-form @submit="addIncome" />
+      <add-income-form @submit="addIncome" @cancel="isAddIncomeModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Income">
-      <update-income-form :income="selectedIncome" @updateIncome="updateIncome" />
+      <update-income-form :income="selectedIncome" @updateIncome="updateIncome" @cancel="isUpdateModalOpened = false" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteIncome" />
+      <confirm-modal :message="deleteMessage" @confirm="deleteIncome" @cancel="isConfirmModalOpened = false" />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->

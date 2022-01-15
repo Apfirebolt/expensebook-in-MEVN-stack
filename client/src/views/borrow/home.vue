@@ -1,10 +1,10 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddBorrowModalOpened" header="Add Borrow">
-      <add-borrow-form @submit="addBorrow" />
+      <add-borrow-form @submit="addBorrow" @cancel="isAddBorrowModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Borrow">
-      <update-borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" mode="edit" />
+      <update-borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" mode="edit" @cancel="isUpdateModalOpened = false" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
       <confirm-modal :message="deleteMessage" @confirm="deleteBorrow" @cancel="closeConfirmModal" />

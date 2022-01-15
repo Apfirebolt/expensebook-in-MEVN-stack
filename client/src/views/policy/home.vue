@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddPolicyModalOpened" header="Add Policy">
-      <add-policy-form @submit="addPolicy" />
+      <add-policy-form @submit="addPolicy" @cancel="isAddPolicyModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Policy">
-      <update-policy-form :policy="selectedPolicy" @updatePolicy="updatePolicy" />
+      <update-policy-form :policy="selectedPolicy" @updatePolicy="updatePolicy" @cancel="isUpdateModalOpened = false" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deletePolicy" />
+      <confirm-modal :message="deleteMessage" @confirm="deletePolicy" @cancel="isConfirmModalOpened = false" />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->

@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddGoalModalOpened" header="Add Goal">
-      <add-goal-form @submit="addGoal" />
+      <add-goal-form @submit="addGoal" @cancel="isAddGoalModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Goal">
-      <update-goal-form :goal="selectedGoal" @updateGoal="updateGoal" />
+      <update-goal-form :goal="selectedGoal" @updateGoal="updateGoal" @cancel="isUpdateModalOpened = false" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteGoal" />
+      <confirm-modal :message="deleteMessage" @confirm="deleteGoal" @cancel="isConfirmModalOpened = false" />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->

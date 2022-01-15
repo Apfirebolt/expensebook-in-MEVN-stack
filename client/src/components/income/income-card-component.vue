@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2">
+  <div class="p-2 bg-yellow-100 rounded">
     <p class="truncate font-semibold text-center my-2">
       {{ income.source }}
     </p>

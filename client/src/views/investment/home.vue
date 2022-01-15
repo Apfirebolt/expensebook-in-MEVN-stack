@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddInvestmentModalOpened" header="Add Investment">
-      <add-investment-form @submit="addInvestment" />
+      <add-investment-form @submit="addInvestment" @cancel="isAddInvestmentModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Investment">
-      <update-investment-form :investment="selectedInvestment" @updateInvestment="updateInvestment" />
+      <update-investment-form :investment="selectedInvestment" @updateInvestment="updateInvestment" @cancel="isUpdateModalOpened = false" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteInvestment" />
+      <confirm-modal :message="deleteMessage" @confirm="deleteInvestment" @cancel="isConfirmModalOpened = false" />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
