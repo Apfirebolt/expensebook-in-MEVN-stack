@@ -22,6 +22,11 @@ const borrowSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    isSettled: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     interestApplied: {
       type: Boolean,
       required: false,

@@ -4,10 +4,10 @@
       <add-borrow-form @submit="addBorrow" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Borrow">
-      <update-borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" />
+      <update-borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" mode="edit" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteBorrow" />
+      <confirm-modal :message="deleteMessage" @confirm="deleteBorrow" @cancel="closeConfirmModal" />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
@@ -245,6 +245,9 @@ export default {
       this.addBorrowAction(formattedPayload);
       this.isAddBorrowModalOpened = false;
       this.getAllBorrowings();
+    },
+    closeConfirmModal() {
+      this.isConfirmModalOpened = false;
     },
     closeSidebar() {
       this.showSidebar = !this.showSidebar;

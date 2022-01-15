@@ -1,19 +1,22 @@
 <template>
-  <div class="p-2">
+  <div class="p-2 border bg-green-100">
     <p class="truncate font-semibold text-center my-2">
-      {{ borrow.borrowedFrom }}
+      Borrowed From <span class="text-blue-500 font-medium"> {{ borrow.borrowedFrom }} </span>
     </p>
     <p class="truncate font-semibold text-center my-2">
       {{ borrow.note }}
     </p>
     <p class="text-center">
-      {{ borrow.amount }}
+      Borrowed Amount <span class="text-blue-500 font-medium">RS {{ borrow.amount }}</span>
     </p>
-    <p class="truncate text-center">
+    <p class="truncate text-center my-1">
       Borrowed on {{ borrow.borrowedOn | formatDateString }}
     </p>
-    <p class="truncate text-center">
+    <p class="truncate text-center my-1">
       Pay on {{ borrow.repayOn | formatDateString }}
+    </p>
+    <p v-if="borrow.isSettled" class="bg-blue-100 text-center my-2 rounded p-2">
+      Settled
     </p>
     <div class="flex items-center justify-center my-2">
       <span class="mx-1 cursor-pointer" @click.prevent="editBorrow">
