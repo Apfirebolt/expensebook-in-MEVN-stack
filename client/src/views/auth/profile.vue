@@ -164,7 +164,7 @@
               <!-- Replace with your content -->
               <div class="my-2 border-4 border-dashed border-gray-200 px-2 py-4 rounded-lg">
                 <change-general-settings :profileData="profileData" @updateProfile="updateProfileAction" />
-                <change-password-form />
+                <change-password-form @changePassword="updateProfileAction" />
                 <upload-profile-picture />
               </div>
               <!-- /End replace -->
