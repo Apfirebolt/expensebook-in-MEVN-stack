@@ -237,6 +237,7 @@ export default {
     addExpense(payload) {
       const formattedPayload = {
         date: payload.date,
+        expenseType: payload.expenseType,
         amount: payload.amount,
         note: payload.note,
       };

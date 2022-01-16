@@ -6,6 +6,9 @@
     <p class="truncate text-center my-1">
       Rs {{ expense.amount }}
     </p>
+    <p v-if="expense.expenseType" class="w-1/2 mx-auto truncate text-center my-2 text-white p-2 rounded" :class="expense.expenseType === 'Lending' ? 'bg-red-700' : 'bg-blue-500'">
+      {{ expense.expenseType }}
+    </p>
     <p class="truncate text-center my-1">
       Spent on {{ expense.date | formatDateString }}
     </p>

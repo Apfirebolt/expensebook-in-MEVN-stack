@@ -34,6 +34,16 @@
         </ValidationProvider>
       </div>
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
+        <t-input-group label="Expense Type">
+          <t-select
+            v-model="expenseData.expenseType"
+            placeholder="Select Expense Type"
+            :options="typeChoices"
+            name="Expense Type"
+          />
+        </t-input-group>
+      </div>
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <ValidationProvider v-slot="{ errors }" name="Due Date">
           <t-input-group
             label="Date"
@@ -69,6 +79,7 @@ export default {
   data() {
     return {
       expenseData: {},
+      typeChoices: ['Personal', 'Lending'],
     };
   },
   mounted() {

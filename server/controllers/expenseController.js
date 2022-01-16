@@ -5,9 +5,10 @@ import Expense from "../models/expenseModel.js";
 // @route   POST /api/expenses
 // @access  Private
 const createExpense = asyncHandler(async (req, res) => {
-    const { note, amount, date } = req.body;
+    const { note, amount, date, expenseType } = req.body;
     const expense = await Expense.create({
         note,
+        expenseType,
         amount,
         date,
         createdBy: req.user._id,
