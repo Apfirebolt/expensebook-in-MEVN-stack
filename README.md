@@ -1,9 +1,8 @@
-# Express Vue Auth Boilerplate using Vuex
+# Expensebook app created in Vue and Express
 
 ## Project Briefing
 
-This is a simple boilerplate to get you started with full stack applications using Express and Vue, MongoDB is used as database and tailwind css is used for UI. Yes, it's created in one of the most popular full stack technologies combination known as MEVN. 
-
+This is an Expense Management Software created in Vue, Express and MongoDB. It has many features which an ideal Expense Management Software should have like adding daily expenses, keep track of borrowings, adding investments and policies etc.
 
 ## Built With
 
@@ -15,7 +14,7 @@ This is a simple boilerplate to get you started with full stack applications usi
 
 ## Authors
 
-* **Amit Prafulla (APFirebolt)** - (http://amitprafull.com/)
+* **Amit Prafulla (APFirebolt)** - (https://apgiiit.com/)
 
 ## Project setup
 
@@ -34,8 +33,18 @@ For production, build the frontend of the app and then run the backend app only.
 npm run build
 npm start
 ```
+## Project Features
+
+- Multi-user Expense Management System
+- Add daily expenses.
+- Add Financial Goals and associate those goals with investments.
+- Add Investments and Policies, automated recurring expenses.
+- Reports and Expense book, various statistics to be generated based on your spending pattern. 
 
 ## Project Updates
+
+- Work to be done on Heroku deployment script.
+- Work on Reports and ExpenseBook modules.
 
 ## Project Screenshots
 
