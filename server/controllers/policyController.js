@@ -43,6 +43,7 @@ const updatePolicy = asyncHandler(async (req, res) => {
     req.body,
     {
       new: true,
+      useFindAndModify: false,
     }
   );
 

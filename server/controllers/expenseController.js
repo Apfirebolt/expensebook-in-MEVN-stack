@@ -29,6 +29,7 @@ const updateExpense = asyncHandler(async (req, res) => {
 
   const expense = await Expense.findOneAndUpdate({ createdBy: req.user._id, _id: req.params.id }, req.body, {
     new: true,
+    useFindAndModify: false,
   });
 
   if (expense) {

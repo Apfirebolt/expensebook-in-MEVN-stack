@@ -32,6 +32,7 @@ const createInvestment = asyncHandler(async (req, res) => {
 const updateInvestment = asyncHandler(async (req, res) => {
   const investment = await Investment.findOneAndUpdate({ createdBy: req.user._id, _id: req.params.id }, req.body, {
     new: true,
+    useFindAndModify: false,
   });
 
   if (investment) {

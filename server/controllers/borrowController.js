@@ -40,6 +40,7 @@ const updateBorrow = asyncHandler(async (req, res) => {
     { createdBy: req.user._id, _id: req.params.id },
     req.body,
     {
+      useFindAndModify: false,
       new: true,
     }
   );
