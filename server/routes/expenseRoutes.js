@@ -5,7 +5,8 @@ import {
   getExpenseDetail,
   createExpense,
   updateExpense,
-  deleteExpense
+  deleteExpense,
+  csvExpenseExport
 } from '../controllers/expenseController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
@@ -13,6 +14,9 @@ router
     .route('/')
     .post(protect, createExpense)
     .get(protect, getAllExpenses)
+router
+    .route('/csv-export')
+    .get(protect, csvExpenseExport)
 router
   .route('/:id')
   .get(protect, getExpenseDetail)

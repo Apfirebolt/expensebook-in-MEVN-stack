@@ -95,6 +95,23 @@ const actions = {
         console.log(err);
       });
   },
+
+  // Export as csv
+  [types.EXPORT_EXPENSE_DATA]: () => {
+    const url = '/expense/csv-export';
+    interceptor.get(url)
+      .then((response) => {
+        if (response) {
+          events.emit('add_toast', {
+            content: 'Expense data imported successfully',
+            type: 'success',
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export default {
