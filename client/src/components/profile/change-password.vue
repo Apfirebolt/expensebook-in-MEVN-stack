@@ -3,7 +3,7 @@
     <form class="font-medium container py-3 px-4 text-gray-700 border-2 my-2 border-rose-600" @submit.prevent="handleSubmit(submitForm)">
       <h3 class="text-xl text-center text-red-600 my-2">
         CHANGE PASSWORD
-      </h3>  
+      </h3>
       <div class="grid sm:grid-cols-2 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <ValidationProvider v-slot="{errors}" name="Current Password" rules="required">
           <t-input-group label="Enter Your Current Password" :feedback="errors[0]" :variant="errors.length > 0?'danger':''">

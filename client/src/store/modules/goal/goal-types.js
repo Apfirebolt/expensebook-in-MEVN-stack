@@ -11,3 +11,6 @@ export const SET_GOAL_DETAIL = 'goal/SET_GOAL_DETAIL';
 export const CREATE_GOAL_ACTION = 'goal/CREATE_GOAL_ACTION';
 export const UPDATE_GOAL_ACTION = 'goal/UPDATE_GOAL_ACTION';
 export const DELETE_GOAL_ACTION = 'goal/DELETE_GOAL_ACTION';
+
+export const SET_GOAL_COUNT = 'goal/SET_GOAL_COUNT';
+export const GET_GOAL_COUNT = 'goal/GET_GOAL_COUNT';

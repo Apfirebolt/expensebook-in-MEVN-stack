@@ -67,12 +67,26 @@ const getIncomeDetail = asyncHandler(async (req, res) => {
 // @route   PUT /api/income
 // @access  Private
 const getAllIncomes = asyncHandler(async (req, res) => {
-  const incomes = await Income.find({
+  const itemsPerPage = 5;
+  const startPage = req.query.page || 1;
+  await Income.find({
     createdBy: req.user._id,
-  });
-  res.json({
-    incomes,
-  });
+  })
+  .skip(itemsPerPage * startPage - itemsPerPage)
+    .limit(itemsPerPage)
+    .exec(function (err, incomes) {
+      Income.countDocuments().exec(function (err, count) {
+        if (err) return next(err);
+        res.status(200).json({
+          incomes,
+          count,
+          success: true,
+          itemsPerPage,
+          startPage,
+          lastPage: Math.ceil(count / itemsPerPage),
+        });
+      });
+    });
 });
 
 // @desc    Delete user Income

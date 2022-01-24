@@ -58,7 +58,7 @@
             />
           </t-input-group>
         </ValidationProvider>
-         <ValidationProvider v-slot="{ errors }" name="Policy Premium Amount" rules="required">
+        <ValidationProvider v-slot="{ errors }" name="Policy Premium Amount" rules="required">
           <t-input-group
             label="Policy Premium Amount"
             :feedback="errors[0]"

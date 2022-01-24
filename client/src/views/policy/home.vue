@@ -181,6 +181,16 @@
                   </div>
                 </div>
               </div>
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="policyCount"
+                    :per-page="urlParams.limit"
+                    :limit="5"
+                  />
+                </div>
+              </div>
               <!-- /End replace -->
             </div>
           </div>
@@ -217,15 +227,29 @@ export default {
       isUpdateModalOpened: false,
       selectedPolicy: null,
       deleteMessage: '',
+      urlParams: {
+        page: 1,
+        limit: 5,
+      },
     };
   },
   computed: {
     ...mapGetters({
       allPolicies: policyTypes.GET_ALL_POLICIES,
+      policyCount: policyTypes.GET_POLICY_COUNT
     }),
   },
+  watch: {
+    $route() {
+      this.getAllPolicies(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllPolicies();
+    this.getAllPolicies(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -234,6 +258,13 @@ export default {
       deletePolicyAction: policyTypes.DELETE_POLICY_ACTION,
       getAllPolicies: policyTypes.GET_ALL_POLICIES_ACTION,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'PolicyHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addPolicy(payload) {
       const formattedPayload = {
         name: payload.name,

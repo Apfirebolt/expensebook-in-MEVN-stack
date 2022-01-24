@@ -3,11 +3,13 @@ import events from '../../../plugins/events';
 import interceptor from '../../../plugins/interceptor';
 
 const state = {
+  count: 0,
   income: null,
   incomes: [],
 };
 
 const getters = {
+  [types.GET_INCOME_COUNT]: (state) => state.count,
   [types.GET_INCOME_DETAIL]: (state) => state.income,
   [types.GET_ALL_INCOME]: (state) => state.incomes,
 };
@@ -18,6 +20,9 @@ const mutations = {
   },
   [types.SET_ALL_INCOME]: (state, payload) => {
     state.incomes = payload;
+  },
+  [types.SET_INCOME_COUNT]: (state, payload) => {
+    state.count = payload;
   },
 };
 
@@ -41,13 +46,14 @@ const actions = {
   },
 
   // Setting all income
-  [types.GET_ALL_INCOME_ACTION]: ({ commit }) => {
+  [types.GET_ALL_INCOME_ACTION]: ({ commit }, urlParams) => {
     const url = '/income';
-    interceptor
-      .get(url)
+    interceptor.get(url, {
+      params: urlParams,
+    })
       .then((response) => {
-        console.log('Response is ', response);
         commit(types.SET_ALL_INCOME, response.incomes);
+        commit(types.SET_INCOME_COUNT, response.count);
       })
       .catch((err) => {
         console.log(err);

@@ -78,12 +78,26 @@ const getPolicyDetail = asyncHandler(async (req, res) => {
 // @route   PUT /api/policies
 // @access  Private
 const getAllPolicies = asyncHandler(async (req, res) => {
-  const policies = await Policy.find({
+  const itemsPerPage = 5;
+  const startPage = req.query.page || 1;
+  await Policy.find({
     createdBy: req.user._id,
-  });
-  res.json({
-    policies,
-  });
+  })
+  .skip(itemsPerPage * startPage - itemsPerPage)
+    .limit(itemsPerPage)
+    .exec(function (err, policies) {
+      Policy.countDocuments().exec(function (err, count) {
+        if (err) return next(err);
+        res.status(200).json({
+          policies,
+          count,
+          success: true,
+          itemsPerPage,
+          startPage,
+          lastPage: Math.ceil(count / itemsPerPage),
+        });
+      });
+    });
 });
 
 // @desc    Delete user policy

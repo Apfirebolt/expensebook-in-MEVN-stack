@@ -1,13 +1,21 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddExpenseModalOpened" header="Add Expense">
-      <add-expense-form @submit="addExpense" @cancel="isAddExpenseModalOpened = false " />
+      <add-expense-form @submit="addExpense" @cancel="isAddExpenseModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Expense">
-      <update-expense-form :expense="selectedExpense" @updateExpense="updateExpense" @cancel="isUpdateModalOpened = false" />
+      <update-expense-form
+        :expense="selectedExpense"
+        @updateExpense="updateExpense"
+        @cancel="isUpdateModalOpened = false"
+      />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteExpense" @cancel="isConfirmModalOpened = false" />
+      <confirm-modal
+        :message="deleteMessage"
+        @confirm="deleteExpense"
+        @cancel="isConfirmModalOpened = false"
+      />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
@@ -182,8 +190,22 @@
               <div class="my-2 border-4 border-dashed border-gray-200 px-2 py-4 rounded-lg">
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
                   <div v-for="expense in allExpenses" :key="expense._id">
-                    <expense-card :expense="expense" @deleteExpense="openConfirmDeleteModal" @updateExpense="openUpdateExpenseModal" />
+                    <expense-card
+                      :expense="expense"
+                      @deleteExpense="openConfirmDeleteModal"
+                      @updateExpense="openUpdateExpenseModal"
+                    />
                   </div>
+                </div>
+              </div>
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="expenseCount"
+                    :per-page="urlParams.limit"
+                    :limit="2"
+                  />
                 </div>
               </div>
               <!-- /End replace -->
@@ -222,15 +244,30 @@ export default {
       isUpdateModalOpened: false,
       selectedExpense: null,
       deleteMessage: '',
+      urlParams: {
+        page: 1,
+        limit: 5,
+      },
+      total: 0,
     };
   },
   computed: {
     ...mapGetters({
       allExpenses: expenseTypes.GET_ALL_EXPENSES,
+      expenseCount: expenseTypes.GET_EXPENSE_COUNT,
     }),
   },
+  watch: {
+    $route() {
+      this.getAllExpenses(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllExpenses();
+    this.getAllExpenses(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -240,6 +277,13 @@ export default {
       getAllExpenses: expenseTypes.GET_ALL_EXPENSES_ACTION,
       exportExpenseAsCSV: expenseTypes.EXPORT_EXPENSE_DATA,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'ExpenseHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addExpense(payload) {
       const formattedPayload = {
         date: payload.date,

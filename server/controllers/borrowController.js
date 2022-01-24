@@ -76,12 +76,26 @@ const getBorrowDetail = asyncHandler(async (req, res) => {
 // @route   GET /api/borrow
 // @access  Private
 const getAllBorrow = asyncHandler(async (req, res) => {
-  const borrowing = await Borrow.find({
+  const itemsPerPage = 5;
+  const startPage = req.query.page || 1;
+  await Borrow.find({
     createdBy: req.user._id,
-  });
-  res.json({
-    borrowing,
-  });
+  })
+  .skip(itemsPerPage * startPage - itemsPerPage)
+    .limit(itemsPerPage)
+    .exec(function (err, borrowing) {
+      Borrow.countDocuments().exec(function (err, count) {
+        if (err) return next(err);
+        res.status(200).json({
+          borrowing,
+          count,
+          success: true,
+          itemsPerPage,
+          startPage,
+          lastPage: Math.ceil(count / itemsPerPage),
+        });
+      });
+    });
 });
 
 // @desc    Delete user borrow

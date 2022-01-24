@@ -3,11 +3,13 @@ import events from '../../../plugins/events';
 import interceptor from '../../../plugins/interceptor';
 
 const state = {
+  count: 0,
   borrow: null,
   borrowings: [],
 };
 
 const getters = {
+  [types.GET_BORROW_COUNT]: (state) => state.count,
   [types.GET_BORROWING_DETAIL]: (state) => state.borrow,
   [types.GET_ALL_BORROWINGS]: (state) => state.borrowings,
 };
@@ -18,6 +20,9 @@ const mutations = {
   },
   [types.SET_ALL_BORROWINGS]: (state, payload) => {
     state.borrowings = payload;
+  },
+  [types.SET_BORROW_COUNT]: (state, payload) => {
+    state.count = payload;
   },
 };
 
@@ -41,12 +46,14 @@ const actions = {
   },
 
   // Setting all borrowings
-  [types.GET_ALL_BORROWINGS_ACTION]: ({ commit }) => {
+  [types.GET_ALL_BORROWINGS_ACTION]: ({ commit }, urlParams) => {
     const url = '/borrow';
-    interceptor
-      .get(url)
+    interceptor.get(url, {
+      params: urlParams,
+    })
       .then((response) => {
         commit(types.SET_ALL_BORROWINGS, response.borrowing);
+        commit(types.SET_BORROW_COUNT, response.count);
       })
       .catch((err) => {
         console.log(err);

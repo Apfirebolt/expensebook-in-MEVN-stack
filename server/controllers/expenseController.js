@@ -69,12 +69,26 @@ const getExpenseDetail = asyncHandler(async (req, res) => {
 // @route   PUT /api/expenses
 // @access  Private
 const getAllExpenses = asyncHandler(async (req, res) => {
-  const expenses = await Expense.find({
+  const itemsPerPage = 5;
+  const startPage = req.query.page || 1;
+  await Expense.find({
     createdBy: req.user._id,
-  });
-  res.json({
-    expenses,
-  });
+  })
+  .skip(itemsPerPage * startPage - itemsPerPage)
+    .limit(itemsPerPage)
+    .exec(function (err, expenses) {
+      Expense.countDocuments().exec(function (err, count) {
+        if (err) return next(err);
+        res.status(200).json({
+          expenses,
+          count,
+          success: true,
+          itemsPerPage,
+          startPage,
+          lastPage: Math.ceil(count / itemsPerPage),
+        });
+      });
+    });
 });
 
 // @desc    Delete user expense

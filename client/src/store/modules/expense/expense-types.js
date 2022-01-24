@@ -13,3 +13,6 @@ export const UPDATE_EXPENSE_ACTION = 'expense/UPDATE_EXPENSE_ACTION';
 export const DELETE_EXPENSE_ACTION = 'expense/DELETE_EXPENSE_ACTION';
 
 export const EXPORT_EXPENSE_DATA = 'expense/EXPORT_EXPENSE_DATA';
+
+export const SET_EXPENSE_COUNT = 'expense/SET_EXPENSE_COUNT';
+export const GET_EXPENSE_COUNT = 'expense/GET_EXPENSE_COUNT';

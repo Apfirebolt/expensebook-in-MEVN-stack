@@ -181,7 +181,16 @@
                   </div>
                 </div>
               </div>
-              <!-- /End replace -->
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="incomeCount"
+                    :per-page="urlParams.limit"
+                    :limit="5"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </main>
@@ -217,15 +226,29 @@ export default {
       isUpdateModalOpened: false,
       selectedIncome: null,
       deleteMessage: '',
+      urlParams: {
+        page: 1,
+        limit: 5,
+      },
     };
   },
   computed: {
     ...mapGetters({
       allIncomes: incomeTypes.GET_ALL_INCOME,
+      incomeCount: incomeTypes.GET_INCOME_COUNT,
     }),
   },
+  watch: {
+    $route() {
+      this.getAllIncomes(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllIncomes();
+    this.getAllIncomes(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -234,6 +257,13 @@ export default {
       deleteIncomeAction: incomeTypes.DELETE_INCOME_ACTION,
       getAllIncomes: incomeTypes.GET_ALL_INCOME_ACTION,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'IncomeHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addIncome(payload) {
       const formattedPayload = {
         source: payload.source,

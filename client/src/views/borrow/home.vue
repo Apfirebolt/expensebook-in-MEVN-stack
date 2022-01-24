@@ -4,7 +4,7 @@
       <add-borrow-form @submit="addBorrow" @cancel="isAddBorrowModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Borrow">
-      <update-borrow-form :borrow="selectedBorrowing" @updateBorrow="updateBorrow" mode="edit" @cancel="isUpdateModalOpened = false" />
+      <update-borrow-form :borrow="selectedBorrowing" mode="edit" @updateBorrow="updateBorrow" @cancel="isUpdateModalOpened = false" />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
       <confirm-modal :message="deleteMessage" @confirm="deleteBorrow" @cancel="closeConfirmModal" />
@@ -181,6 +181,16 @@
                   </div>
                 </div>
               </div>
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="borrowCount"
+                    :per-page="urlParams.limit"
+                    :limit="5"
+                  />
+                </div>
+              </div>
               <!-- /End replace -->
             </div>
           </div>
@@ -217,15 +227,29 @@ export default {
       isUpdateModalOpened: false,
       selectedBorrowing: null,
       deleteMessage: '',
+      urlParams: {
+        page: 1,
+        limit: 5,
+      },
     };
   },
   computed: {
     ...mapGetters({
       allBorrowings: borrowTypes.GET_ALL_BORROWINGS,
+      borrowCount: borrowTypes.GET_BORROW_COUNT
     }),
   },
+  watch: {
+    $route() {
+      this.getAllBorrowings(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllBorrowings();
+    this.getAllBorrowings(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -234,6 +258,13 @@ export default {
       deleteBorrowAction: borrowTypes.DELETE_BORROW_ACTION,
       getAllBorrowings: borrowTypes.GET_ALL_BORROWINGS_ACTION,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'BorrowHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addBorrow(payload) {
       const formattedPayload = {
         borrowedOn: payload.borrowedOn,

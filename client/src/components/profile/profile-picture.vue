@@ -1,8 +1,8 @@
 <template>
   <form enctype="multipart/form-data" class="border-2 font-medium border-rose-600 my-2 p-2" @submit.prevent="submitForm">
     <h3 class="text-xl text-center text-red-600 my-2">
-        CHANGE PROFILE PICTURE
-    </h3>  
+      CHANGE PROFILE PICTURE
+    </h3>
     <div class="space-y-2 flex justify-center">
       <input ref="fileinput" type="file" class="hidden" multiple @change="updateProfilePicture">
       <div class="mx-2">

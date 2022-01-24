@@ -3,11 +3,13 @@ import events from '../../../plugins/events';
 import interceptor from '../../../plugins/interceptor';
 
 const state = {
+  count: 0,
   policy: null,
   policies: [],
 };
 
 const getters = {
+  [types.GET_POLICY_COUNT]: (state) => state.count,
   [types.GET_POLICY_DETAIL]: (state) => state.policy,
   [types.GET_ALL_POLICIES]: (state) => state.policies,
 };
@@ -18,6 +20,9 @@ const mutations = {
   },
   [types.SET_ALL_POLICIES]: (state, payload) => {
     state.policies = payload;
+  },
+  [types.SET_POLICY_COUNT]: (state, payload) => {
+    state.count = payload;
   },
 };
 
@@ -41,12 +46,14 @@ const actions = {
   },
 
   // Setting all policies
-  [types.GET_ALL_POLICIES_ACTION]: ({ commit }) => {
+  [types.GET_ALL_POLICIES_ACTION]: ({ commit }, urlParams) => {
     const url = '/policies';
-    interceptor
-      .get(url)
+    interceptor.get(url, {
+      params: urlParams,
+    })
       .then((response) => {
         commit(types.SET_ALL_POLICIES, response.policies);
+        commit(types.SET_POLICY_COUNT, response.count);
       })
       .catch((err) => {
         console.log(err);
