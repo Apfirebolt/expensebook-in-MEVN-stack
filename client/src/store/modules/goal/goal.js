@@ -3,11 +3,13 @@ import events from '../../../plugins/events';
 import interceptor from '../../../plugins/interceptor';
 
 const state = {
+  count: 0,
   goal: null,
   goals: [],
 };
 
 const getters = {
+  [types.GET_GOAL_COUNT]: (state) => state.count,
   [types.GET_GOAL_DETAIL]: (state) => state.goal,
   [types.GET_ALL_GOALS]: (state) => state.goals,
 };
@@ -18,6 +20,9 @@ const mutations = {
   },
   [types.SET_ALL_GOALS]: (state, payload) => {
     state.goals = payload;
+  },
+  [types.SET_GOAL_COUNT]: (state, payload) => {
+    state.count = payload;
   },
 };
 
@@ -41,12 +46,14 @@ const actions = {
   },
 
   // Setting all GOALS
-  [types.GET_ALL_GOALS_ACTION]: ({ commit }) => {
+  [types.GET_ALL_GOALS_ACTION]: ({ commit }, urlParams) => {
     const url = '/goals';
-    interceptor
-      .get(url)
+    interceptor.get(url, {
+      params: urlParams,
+    })
       .then((response) => {
         commit(types.SET_ALL_GOALS, response.goals);
+        commit(types.SET_GOAL_COUNT, response.count);
       })
       .catch((err) => {
         console.log(err);

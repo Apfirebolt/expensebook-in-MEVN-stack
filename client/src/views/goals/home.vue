@@ -185,7 +185,7 @@
                 <div class="class max-w-2xl">
                   <t-pagination
                     v-model="urlParams.page"
-                    :total-items="allGoals.length"
+                    :total-items="goalCount"
                     :per-page="urlParams.limit"
                     :limit="5"
                   />
@@ -229,17 +229,27 @@ export default {
       deleteMessage: '',
       urlParams: {
         page: 1,
-        limit: 20,
+        limit: 5,
       },
     };
   },
   computed: {
     ...mapGetters({
       allGoals: goalTypes.GET_ALL_GOALS,
+      goalCount: goalTypes.GET_GOAL_COUNT,
     }),
   },
+  watch: {
+    $route() {
+      this.getAllGoals(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllGoals();
+    this.getAllGoals(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -248,6 +258,13 @@ export default {
       deleteGoalAction: goalTypes.DELETE_GOAL_ACTION,
       getAllGoals: goalTypes.GET_ALL_GOALS_ACTION,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'GoalsHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addGoal(payload) {
       const formattedPayload = {
         title: payload.title,

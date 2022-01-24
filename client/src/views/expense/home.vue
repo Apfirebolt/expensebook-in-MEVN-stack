@@ -78,7 +78,7 @@
                   class="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                   alt="Workflow"
-                />
+                >
               </div>
               <mobile-menu-component />
             </div>
@@ -90,7 +90,7 @@
                       class="inline-block h-10 w-10 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
-                    />
+                    >
                   </div>
                   <div class="ml-3">
                     <p class="text-base font-medium text-white">Tom Cook</p>
@@ -119,7 +119,7 @@
                 class="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                 alt="Workflow"
-              />
+              >
             </div>
             <desktop-sidebar-component />
           </div>
@@ -131,7 +131,7 @@
                     class="inline-block h-9 w-9 rounded-full"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
-                  />
+                  >
                 </div>
                 <div class="ml-3">
                   <p class="text-sm font-medium text-white">Tom Cook</p>
@@ -173,9 +173,13 @@
         <main class="flex-1">
           <div class="py-6">
             <div class="max-w-7xl flex justify-between mx-auto px-4 sm:px-6 md:px-8">
-              <h1 class="text-2xl font-semibold text-gray-900">Expense</h1>
+              <h1 class="text-2xl font-semibold text-gray-900">
+                Expense
+              </h1>
               <div>
-                <t-button @click="exportExpenseAsCSV"> Export Expense Data </t-button>
+                <t-button @click="exportExpenseAsCSV">
+                  Export Expense Data
+                </t-button>
                 <t-button class="ml-2" @click="isAddExpenseModalOpened = true">
                   Add Expense
                 </t-button>
@@ -213,17 +217,17 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
-import * as expenseTypes from "../../store/modules/expense/expense-types";
-import AddExpenseForm from "../../components/expense/add-update-form.vue";
-import UpdateExpenseForm from "../../components/expense/add-update-form.vue";
-import ExpenseCard from "../../components/expense/expense-card.vue";
-import DesktopSidebarComponent from "../../components/common/sidebar.vue";
-import MobileMenuComponent from "../../components/common/mobile-menu.vue";
-import ConfirmModal from "../../components/common/confirm-modal.vue";
+import { mapActions, mapGetters } from 'vuex';
+import * as expenseTypes from '../../store/modules/expense/expense-types';
+import AddExpenseForm from '../../components/expense/add-update-form.vue';
+import UpdateExpenseForm from '../../components/expense/add-update-form.vue';
+import ExpenseCard from '../../components/expense/expense-card.vue';
+import DesktopSidebarComponent from '../../components/common/sidebar.vue';
+import MobileMenuComponent from '../../components/common/mobile-menu.vue';
+import ConfirmModal from '../../components/common/confirm-modal.vue';
 
 export default {
-  name: "ExpenseHome",
+  name: 'ExpenseHome',
   components: {
     AddExpenseForm,
     UpdateExpenseForm,
@@ -239,7 +243,7 @@ export default {
       isConfirmModalOpened: false,
       isUpdateModalOpened: false,
       selectedExpense: null,
-      deleteMessage: "",
+      deleteMessage: '',
       urlParams: {
         page: 1,
         limit: 5,
@@ -250,7 +254,7 @@ export default {
   computed: {
     ...mapGetters({
       allExpenses: expenseTypes.GET_ALL_EXPENSES,
-      expenseCount: expenseTypes.GET_EXPENSE_COUNT
+      expenseCount: expenseTypes.GET_EXPENSE_COUNT,
     }),
   },
   watch: {

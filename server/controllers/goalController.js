@@ -6,7 +6,6 @@ import Goal from "../models/goalModel.js";
 // @access  Private
 const createGoal = asyncHandler(async (req, res) => {
   const { title, content, status, duration, amount } = req.body;
-  console.log('Req body for goal ', req.body);
   const goal = await Goal.create({
     title,
     content,
@@ -68,12 +67,26 @@ const getGoalDetail = asyncHandler(async (req, res) => {
 // @route   PUT /api/goals
 // @access  Private
 const getAllGoals = asyncHandler(async (req, res) => {
-  const goals = await Goal.find({
+  const itemsPerPage = 5;
+  const startPage = req.query.page || 1;
+  await Goal.find({
     createdBy: req.user._id,
-  });
-  res.json({
-    goals,
-  });
+  })
+  .skip(itemsPerPage * startPage - itemsPerPage)
+    .limit(itemsPerPage)
+    .exec(function (err, goals) {
+      Goal.countDocuments().exec(function (err, count) {
+        if (err) return next(err);
+        res.status(200).json({
+          goals,
+          count,
+          success: true,
+          itemsPerPage,
+          startPage,
+          lastPage: Math.ceil(count / itemsPerPage),
+        });
+      });
+    });
 });
 
 // @desc    Delete user Goal

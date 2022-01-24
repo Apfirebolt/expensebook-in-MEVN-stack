@@ -163,7 +163,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
               <!-- Replace with your content -->
               <div class="my-2 border-4 border-dashed border-gray-200 px-2 py-4 rounded-lg">
-                <change-general-settings :profileData="profileData" @updateProfile="updateProfileAction" />
+                <change-general-settings :profile-data="profileData" @updateProfile="updateProfileAction" />
                 <change-password-form @changePassword="updateProfileAction" />
                 <upload-profile-picture />
               </div>
@@ -191,7 +191,7 @@ export default {
     MobileMenuComponent,
     ChangePasswordForm,
     UploadProfilePicture,
-    ChangeGeneralSettings
+    ChangeGeneralSettings,
   },
   data() {
     return {
@@ -210,7 +210,7 @@ export default {
   methods: {
     ...mapActions({
       getProfileAction: authTypes.GET_PROFILE_DATA,
-      updateProfileAction: authTypes.UPDATE_PROFILE_SETTINGS
+      updateProfileAction: authTypes.UPDATE_PROFILE_SETTINGS,
     }),
     closeSidebar() {
       this.showSidebar = !this.showSidebar;

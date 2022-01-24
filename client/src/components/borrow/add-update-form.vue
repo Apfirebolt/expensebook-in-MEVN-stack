@@ -55,10 +55,10 @@
       </div>
       <div v-if="mode === 'edit'" class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <t-input-group label="Is it paid back and settled ?">
-          <t-checkbox name="isSettled" v-model="borrowData.isSettled" />
+          <t-checkbox v-model="borrowData.isSettled" name="isSettled" />
         </t-input-group>
       </div>
-      
+
       <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
         <t-input-group label="Borrow Desription (Optional)">
           <t-textarea
@@ -93,8 +93,8 @@ export default {
     mode: {
       type: String,
       required: false,
-      default: 'create'
-    }
+      default: 'create',
+    },
   },
   data() {
     return {

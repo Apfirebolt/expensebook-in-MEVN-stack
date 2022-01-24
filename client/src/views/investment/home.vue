@@ -185,7 +185,7 @@
                 <div class="class max-w-2xl">
                   <t-pagination
                     v-model="urlParams.page"
-                    :total-items="allInvestments.length"
+                    :total-items="investmentCount"
                     :per-page="urlParams.limit"
                     :limit="5"
                   />
@@ -229,17 +229,27 @@ export default {
       deleteMessage: '',
       urlParams: {
         page: 1,
-        limit: 20,
+        limit: 5,
       },
     };
   },
   computed: {
     ...mapGetters({
       allInvestments: investmentTypes.GET_ALL_INVESTMENTS,
+      investmentCount: investmentTypes.GET_INVESTMENT_COUNT,
     }),
   },
+  watch: {
+    $route() {
+      this.getAllInvestments(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllInvestments();
+    this.getAllInvestments(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -248,6 +258,13 @@ export default {
       deleteInvestmentAction: investmentTypes.DELETE_INVESTMENT_ACTION,
       getAllInvestments: investmentTypes.GET_ALL_INVESTMENTS_ACTION,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'InvestmentHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addInvestment(payload) {
       const formattedPayload = {
         type: payload.type,

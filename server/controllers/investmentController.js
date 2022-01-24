@@ -65,12 +65,26 @@ const getInvestmentDetail = asyncHandler(async (req, res) => {
 // @route   PUT /api/investments
 // @access  Private
 const getAllInvestments = asyncHandler(async (req, res) => {
-  const investments = await Investment.find({
+  const itemsPerPage = 5;
+  const startPage = req.query.page || 1;
+  await Investment.find({
     createdBy: req.user._id,
-  });
-  res.json({
-    investments
-  });
+  })
+  .skip(itemsPerPage * startPage - itemsPerPage)
+    .limit(itemsPerPage)
+    .exec(function (err, investments) {
+      Investment.countDocuments().exec(function (err, count) {
+        if (err) return next(err);
+        res.status(200).json({
+          investments,
+          count,
+          success: true,
+          itemsPerPage,
+          startPage,
+          lastPage: Math.ceil(count / itemsPerPage),
+        });
+      });
+    });
 });
 
 // @desc    Delete user investment
