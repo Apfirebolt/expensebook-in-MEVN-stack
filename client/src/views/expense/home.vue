@@ -1,13 +1,21 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <t-modal v-model="isAddExpenseModalOpened" header="Add Expense">
-      <add-expense-form @submit="addExpense" @cancel="isAddExpenseModalOpened = false " />
+      <add-expense-form @submit="addExpense" @cancel="isAddExpenseModalOpened = false" />
     </t-modal>
     <t-modal v-model="isUpdateModalOpened" header="Update Expense">
-      <update-expense-form :expense="selectedExpense" @updateExpense="updateExpense" @cancel="isUpdateModalOpened = false" />
+      <update-expense-form
+        :expense="selectedExpense"
+        @updateExpense="updateExpense"
+        @cancel="isUpdateModalOpened = false"
+      />
     </t-modal>
     <t-modal v-model="isConfirmModalOpened" header="Confirm Delete">
-      <confirm-modal :message="deleteMessage" @confirm="deleteExpense" @cancel="isConfirmModalOpened = false" />
+      <confirm-modal
+        :message="deleteMessage"
+        @confirm="deleteExpense"
+        @cancel="isConfirmModalOpened = false"
+      />
     </t-modal>
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
@@ -70,7 +78,7 @@
                   class="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                   alt="Workflow"
-                >
+                />
               </div>
               <mobile-menu-component />
             </div>
@@ -82,7 +90,7 @@
                       class="inline-block h-10 w-10 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
-                    >
+                    />
                   </div>
                   <div class="ml-3">
                     <p class="text-base font-medium text-white">Tom Cook</p>
@@ -111,7 +119,7 @@
                 class="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                 alt="Workflow"
-              >
+              />
             </div>
             <desktop-sidebar-component />
           </div>
@@ -123,7 +131,7 @@
                     class="inline-block h-9 w-9 rounded-full"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
-                  >
+                  />
                 </div>
                 <div class="ml-3">
                   <p class="text-sm font-medium text-white">Tom Cook</p>
@@ -165,13 +173,9 @@
         <main class="flex-1">
           <div class="py-6">
             <div class="max-w-7xl flex justify-between mx-auto px-4 sm:px-6 md:px-8">
-              <h1 class="text-2xl font-semibold text-gray-900">
-                Expense
-              </h1>
+              <h1 class="text-2xl font-semibold text-gray-900">Expense</h1>
               <div>
-                <t-button @click="exportExpenseAsCSV">
-                  Export Expense Data
-                </t-button>
+                <t-button @click="exportExpenseAsCSV"> Export Expense Data </t-button>
                 <t-button class="ml-2" @click="isAddExpenseModalOpened = true">
                   Add Expense
                 </t-button>
@@ -182,8 +186,22 @@
               <div class="my-2 border-4 border-dashed border-gray-200 px-2 py-4 rounded-lg">
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 sm:gap-8 sm:my-4">
                   <div v-for="expense in allExpenses" :key="expense._id">
-                    <expense-card :expense="expense" @deleteExpense="openConfirmDeleteModal" @updateExpense="openUpdateExpenseModal" />
+                    <expense-card
+                      :expense="expense"
+                      @deleteExpense="openConfirmDeleteModal"
+                      @updateExpense="openUpdateExpenseModal"
+                    />
                   </div>
+                </div>
+              </div>
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="allExpenses.length"
+                    :per-page="urlParams.limit"
+                    :limit="5"
+                  />
                 </div>
               </div>
               <!-- /End replace -->
@@ -195,17 +213,17 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import * as expenseTypes from '../../store/modules/expense/expense-types';
-import AddExpenseForm from '../../components/expense/add-update-form.vue';
-import UpdateExpenseForm from '../../components/expense/add-update-form.vue';
-import ExpenseCard from '../../components/expense/expense-card.vue';
-import DesktopSidebarComponent from '../../components/common/sidebar.vue';
-import MobileMenuComponent from '../../components/common/mobile-menu.vue';
-import ConfirmModal from '../../components/common/confirm-modal.vue';
+import { mapActions, mapGetters } from "vuex";
+import * as expenseTypes from "../../store/modules/expense/expense-types";
+import AddExpenseForm from "../../components/expense/add-update-form.vue";
+import UpdateExpenseForm from "../../components/expense/add-update-form.vue";
+import ExpenseCard from "../../components/expense/expense-card.vue";
+import DesktopSidebarComponent from "../../components/common/sidebar.vue";
+import MobileMenuComponent from "../../components/common/mobile-menu.vue";
+import ConfirmModal from "../../components/common/confirm-modal.vue";
 
 export default {
-  name: 'ExpenseHome',
+  name: "ExpenseHome",
   components: {
     AddExpenseForm,
     UpdateExpenseForm,
@@ -221,7 +239,12 @@ export default {
       isConfirmModalOpened: false,
       isUpdateModalOpened: false,
       selectedExpense: null,
-      deleteMessage: '',
+      deleteMessage: "",
+      urlParams: {
+        page: 1,
+        limit: 20,
+      },
+      total: 0,
     };
   },
   computed: {

@@ -181,6 +181,16 @@
                   </div>
                 </div>
               </div>
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="allGoals.length"
+                    :per-page="urlParams.limit"
+                    :limit="5"
+                  />
+                </div>
+              </div>
               <!-- /End replace -->
             </div>
           </div>
@@ -217,6 +227,10 @@ export default {
       isUpdateModalOpened: false,
       selectedGoal: null,
       deleteMessage: '',
+      urlParams: {
+        page: 1,
+        limit: 20,
+      },
     };
   },
   computed: {

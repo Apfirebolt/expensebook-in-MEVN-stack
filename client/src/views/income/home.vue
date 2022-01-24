@@ -181,7 +181,16 @@
                   </div>
                 </div>
               </div>
-              <!-- /End replace -->
+              <div class="flex justify-center my-3">
+                <div class="class max-w-2xl">
+                  <t-pagination
+                    v-model="urlParams.page"
+                    :total-items="allIncomes.length"
+                    :per-page="urlParams.limit"
+                    :limit="5"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </main>
@@ -217,6 +226,11 @@ export default {
       isUpdateModalOpened: false,
       selectedIncome: null,
       deleteMessage: '',
+      urlParams: {
+        page: 1,
+        limit: 20,
+      },
+      total: 0,
     };
   },
   computed: {
