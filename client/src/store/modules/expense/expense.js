@@ -1,14 +1,15 @@
-import axios from 'axios';
 import * as types from './expense-types';
 import events from '../../../plugins/events';
 import interceptor from '../../../plugins/interceptor';
 
 const state = {
+  count: 0,
   expense: null,
   expenses: [],
 };
 
 const getters = {
+  [types.GET_EXPENSE_COUNT]: (state) => state.count,
   [types.GET_EXPENSE_DETAIL]: (state) => state.expense,
   [types.GET_ALL_EXPENSES]: (state) => state.expenses,
 };
@@ -19,6 +20,9 @@ const mutations = {
   },
   [types.SET_ALL_EXPENSES]: (state, payload) => {
     state.expenses = payload;
+  },
+  [types.SET_EXPENSE_COUNT]: (state, payload) => {
+    state.count = payload;
   },
 };
 
@@ -39,11 +43,14 @@ const actions = {
   },
 
   // Setting all expenses
-  [types.GET_ALL_EXPENSES_ACTION]: ({ commit }) => {
+  [types.GET_ALL_EXPENSES_ACTION]: ({ commit }, urlParams) => {
     const url = '/expense';
-    interceptor.get(url)
+    interceptor.get(url, {
+      params: urlParams,
+    })
       .then((response) => {
         commit(types.SET_ALL_EXPENSES, response.expenses);
+        commit(types.SET_EXPENSE_COUNT, response.count);
       })
       .catch((err) => {
         console.log(err);

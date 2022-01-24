@@ -198,9 +198,9 @@
                 <div class="class max-w-2xl">
                   <t-pagination
                     v-model="urlParams.page"
-                    :total-items="allExpenses.length"
+                    :total-items="expenseCount"
                     :per-page="urlParams.limit"
-                    :limit="5"
+                    :limit="2"
                   />
                 </div>
               </div>
@@ -242,7 +242,7 @@ export default {
       deleteMessage: "",
       urlParams: {
         page: 1,
-        limit: 20,
+        limit: 5,
       },
       total: 0,
     };
@@ -250,10 +250,20 @@ export default {
   computed: {
     ...mapGetters({
       allExpenses: expenseTypes.GET_ALL_EXPENSES,
+      expenseCount: expenseTypes.GET_EXPENSE_COUNT
     }),
   },
+  watch: {
+    $route() {
+      this.getAllExpenses(this.urlParams);
+    },
+    urlParams: {
+      handler: 'updateRoute',
+      deep: true,
+    },
+  },
   mounted() {
-    this.getAllExpenses();
+    this.getAllExpenses(this.urlParams);
   },
   methods: {
     ...mapActions({
@@ -263,6 +273,13 @@ export default {
       getAllExpenses: expenseTypes.GET_ALL_EXPENSES_ACTION,
       exportExpenseAsCSV: expenseTypes.EXPORT_EXPENSE_DATA,
     }),
+    async updateRoute() {
+      try {
+        await this.$router.push({ name: 'ExpenseHome', query: this.urlParams });
+      } catch (navigationError) {
+        // Catch and ignore navigation errors caused through multiple params changed
+      }
+    },
     addExpense(payload) {
       const formattedPayload = {
         date: payload.date,
