@@ -1,17 +1,21 @@
 <template>
   <div class="bg-white shadow-sm rounded-md">
     <p class="text-2xl p-3 text-center text-blue-700">Reports Home</p>
-    <hero-section message="Dashboard" />
-    <line-chart v-if="chartData"
+    <!-- <hero-section message="Dashboard" /> -->
+    <line-chart v-if="loaded"
       style="height: 100%"
       chart-id="big-line-chart"
       :chart-data="chartData"
       :extra-options="extraOptions"
     >
     </line-chart>
+    {{ loaded }}
+    <p v-if="expenseAmount.length" class="text-red-500">{{ expenseAmount }}</p>
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import * as expenseTypes from '../../store/modules/expense/expense-types';
 import * as chartConfig from "../../components/reports/chart.config";
 import HeroSection from "../../components/common/hero-section.vue";
 import LineChart from "../../components/reports/DoughNut";
@@ -25,22 +29,42 @@ export default {
   data () {
     return {
       chartData: null,
+      loaded: false,
       extraOptions: chartConfig.chartOptionsMain
     }
   },
-  mounted() {
-    this.fillChartData();
+  computed: {
+    ...mapGetters({
+      allExpenses: expenseTypes.GET_ALL_EXPENSES,
+      expenseCount: expenseTypes.GET_EXPENSE_COUNT,
+    }),
+    expenseAmount() {
+      let expenseAmount = [];
+      this.allExpenses.map((item) => {
+        expenseAmount.push(item.amount);
+      })
+      return expenseAmount;
+    },
+    expenseLabels() {
+      let expenseLabels = [];
+      this.allExpenses.map((item) => {
+        expenseLabels.push(item.note);
+      })
+      return expenseLabels;
+    },
+  },
+  async created() {
+    await this.getAllExpenses();
+  },
+  async mounted() {
+    this.loaded = false;
+    await this.fillChartData();
+    this.loaded = true;
   },
   methods: {
-    randomChartData(n) {
-      const data = [];
-
-      for (let i = 0; i < n; i++) {
-        data.push(Math.round(Math.random() * 200));
-      }
-
-      return data;
-    },
+    ...mapActions({
+      getAllExpenses: expenseTypes.GET_ALL_EXPENSES_ACTION,
+    }),
     fillChartData () {
       this.chartData = {
         datasets: [
@@ -57,25 +81,10 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.randomChartData(9)
+            data: this.expenseAmount
           },
-          {
-            fill: true,
-            borderColor: chartConfig.chartColors.default.danger,
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: chartConfig.chartColors.default.danger,
-            pointBorderColor: 'rgba(255,255,255,0)',
-            pointHoverBackgroundColor: chartConfig.chartColors.default.danger,
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: this.randomChartData(9)
-          }
         ],
-        labels: ['01', '02', '03', '04', '05', '06', '07', '08', '09']
+        labels: this.expenseLabels
       }
     }
   },
