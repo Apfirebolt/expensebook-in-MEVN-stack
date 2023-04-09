@@ -28,12 +28,13 @@ const mutations = {
 
 const actions = {
   // Create Policy Action
-  [types.CREATE_POLICY_ACTION]: ({ commit }, payload) => {
+  [types.CREATE_POLICY_ACTION]: ({ commit, dispatch }, payload) => {
     const url = '/policies';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
+          dispatch(types.GET_ALL_POLICIES)
           events.emit('add_toast', {
             content: 'Policy added successfully',
             type: 'success',

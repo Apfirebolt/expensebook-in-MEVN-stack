@@ -28,12 +28,13 @@ const mutations = {
 
 const actions = {
   // Create Investment Action
-  [types.CREATE_INVESTMENT_ACTION]: ({ commit }, payload) => {
+  [types.CREATE_INVESTMENT_ACTION]: ({ commit, dispatch }, payload) => {
     const url = '/investments';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
+          dispatch(types.GET_ALL_INVESTMENTS)
           events.emit('add_toast', {
             content: 'Investment added successfully',
             type: 'success',

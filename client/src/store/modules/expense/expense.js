@@ -28,10 +28,11 @@ const mutations = {
 
 const actions = {
   // Create Expense Action
-  [types.CREATE_EXPENSE_ACTION]: ({ commit }, payload) => {
+  [types.CREATE_EXPENSE_ACTION]: ({ commit, dispatch }, payload) => {
     const url = '/expense';
     interceptor.post(url, payload)
       .then((response) => {
+        dispatch(types.GET_ALL_EXPENSES)
         events.emit('add_toast', {
           content: 'Expense added successfully',
           type: 'success',

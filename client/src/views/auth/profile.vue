@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow-sm rounded-md">
+  <div class="shadow-sm rounded-md">
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
       <transition
@@ -154,7 +154,7 @@
           </button>
         </div>
         <main class="flex-1">
-          <div class="py-6">
+          <div class="py-6 w-3/4 mx-auto">
             <div class="max-w-7xl flex mx-auto px-4 sm:px-6 md:px-8">
               <h1 class="text-2xl font-semibold text-gray-900">
                 Profile Settings

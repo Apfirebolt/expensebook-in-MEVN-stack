@@ -28,12 +28,13 @@ const mutations = {
 
 const actions = {
   // Create income Action
-  [types.CREATE_INCOME_ACTION]: ({ commit }, payload) => {
+  [types.CREATE_INCOME_ACTION]: ({ commit, dispatch }, payload) => {
     const url = '/income';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
+          dispatch(GET_ALL_INCOME)
           events.emit('add_toast', {
             content: 'Income added successfully',
             type: 'success',

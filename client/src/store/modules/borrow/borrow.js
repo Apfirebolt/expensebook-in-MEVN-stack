@@ -34,6 +34,7 @@ const actions = {
       .post(url, payload)
       .then((response) => {
         if (response) {
+          dispatch(types.GET_ALL_BORROWINGS)
           events.emit('add_toast', {
             content: 'Borrow added successfully',
             type: 'success',

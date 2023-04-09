@@ -28,12 +28,13 @@ const mutations = {
 
 const actions = {
   // Create Goal Action
-  [types.CREATE_GOAL_ACTION]: ({ commit }, payload) => {
+  [types.CREATE_GOAL_ACTION]: ({ commit, dispatch }, payload) => {
     const url = '/goals';
     interceptor
       .post(url, payload)
       .then((response) => {
         if (response) {
+          dispatch(types.GET_ALL_GOALS)
           events.emit('add_toast', {
             content: 'Goal added successfully',
             type: 'success',
